@@ -1,0 +1,10 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="{% static 'farm/css/complete.css' %}" rel="stylesheet">
+	<div>
+		<h3>{{ msg }}</h3>
+		<center><a href="{% url 'index' %}"><button class="btn btn-info">처음으로</button></a></center>
+	</div>
+{% endblock %}
+
