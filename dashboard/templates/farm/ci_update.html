@@ -1,0 +1,71 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'ci' %}"><i class="fas fa-arrow-left"></i></a> 업체정보</h2>
+	<hr>
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">업체코드</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=a name="a" autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="username" class="cols-sm-2 control-label">업체명</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=b name="b" required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="username" class="cols-sm-2 control-label">업체주소</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=c name="c" required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="username" class="cols-sm-2 control-label">업체전화번호</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=d name="d" required/>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'ci' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+{% if d %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+	$("#a").val("{{ d.CI_CODE }}");
+	$("#b").val("{{ d.CI_NAME }}");
+	$("#c").val("{{ d.CI_ADDR }}");
+	$("#d").val("{{ d.CI_PHONE }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

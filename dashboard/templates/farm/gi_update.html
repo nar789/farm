@@ -1,0 +1,220 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function asel(id) {
+			$('#a').val(id);
+		}
+		function psel(id) {
+			$('#p').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'gi' %}"><i class="fas fa-arrow-left"></i></a> 시설정보</h2>
+	<hr>
+
+	<input type=hidden id=a name="a" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    농가경영체ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="asel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GB_FA_NAME}}</td>
+	  			<td style="padding-left: 20px;">{{i.GB_FA_ADDR}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설번호</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설유형코드</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설위치_위도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=d name=d autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설위치_경도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=e name=e autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설면적</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=f name=f autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설구조</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=g name=g autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">온실제어기형식</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=h name=h autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">설치도면</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=i name=i autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">디지털매뉴얼</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=j name=j autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">농장지목</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=k name=k autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">센터담당자</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=l name=l autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">설치업체</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=m name=m autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">제조업체</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=n name=n autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">유지보수업체</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=o name=o autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<input type=hidden id=p name="p" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    기기담당자ID
+	  </button>
+	  {% for i in ds2 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="psel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.DA_NAME}}</td>
+	  			<td style="padding-left: 20px;">{{i.DA_PHONE}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+
+
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'gi' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+{% if d %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+	$("#a").val("{{ d.FI_ID.id }}");
+	$("#b").val("{{ d.GB_NUMBER }}");
+	$("#c").val("{{ d.GB_KIND_CODE }}");
+	$("#d").val("{{ d.GB_FA_LATITUDE }}");
+	$("#e").val("{{ d.GB_FA_LONGITUDE }}");
+	$("#f").val("{{ d.GB_SIZE }}");
+	$("#g").val("{{ d.GB_ARCHITECTURE }}");
+	$("#h").val("{{ d.GB_CONT_KIND }}");
+	$("#i").val("{{ d.GB_INSTALL_DIAGRM }}");
+	$("#j").val("{{ d.GB_DIGITAL_MANUAL }}");
+	$("#k").val("{{ d.GB_FA_LAND_CATER }}");
+	$("#l").val("{{ d.GB_CENTER_DIRECT }}");
+	$("#m").val("{{ d.GB_INSTAL }}");
+	$("#n").val("{{ d.GB_MANUFA }}");
+	$("#o").val("{{ d.GB_MAINTE_COMP }}");
+	$("#p").val("{{ d.DA_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

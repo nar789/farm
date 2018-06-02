@@ -1,0 +1,89 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="{% static 'farm/css/e1.css' %}" rel="stylesheet">	
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+
+
+	<div class=tg>
+		<h3><a href="{% url 'elist' %}"><i class="fas fa-arrow-left"></i></a> 시설정보</h3>		
+		<hr>
+		<a href="{% url 'gi_update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 추가</button></a>
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">ID</th>
+		      <th scope="col">농가경영체ID</th>
+		      <th scope="col">시설번호</th>
+		      <th scope="col">시설유형코드</th>	
+		      <th scope="col">시설위치_위도</th>	
+		      <th scope="col">시설위치_경도</th>	
+		      <th scope="col">시설면적</th>	
+		      <th scope="col">시설구조</th>	
+		      <th scope="col">온실제어기형식</th>	
+		      <th scope="col">설치도면</th>	
+		      <th scope="col">디지털매뉴얼</th>	
+		      <th scope="col">농장지목</th>	
+		      <th scope="col">센터담당자</th>	
+		      <th scope="col">설치업체</th>	
+		      <th scope="col">제조업체</th>	
+		      <th scope="col">유지보수업체</th>	
+		      <th scope="col">기기담당자ID</th>	
+		      <th scope="col">수정</th>	
+		      <th scope="col">삭제</th>	
+		    </tr>
+		  </thead>
+		  <tbody>
+	 
+		{% for i in ds %}
+			
+			<tr>
+				<td>{{i.id}}</td>
+				<td>{{i.FI_ID.GB_FA_NAME}}</td>
+				<td>{{i.GB_NUMBER}}</td>
+				<td>{{i.GB_KIND_CODE}}</td>
+				<td>{{i.GB_FA_LATITUDE}}</td>
+				<td>{{i.GB_FA_LONGITUDE}}</td>
+				<td>{{i.GB_SIZE}}</td>
+				<td>{{i.GB_ARCHITECTURE}}</td>
+				<td>{{i.GB_CONT_KIND}}</td>
+				<td>{{i.GB_INSTALL_DIAGRM}}</td>
+				<td>{{i.GB_DIGITAL_MANUAL}}</td>
+				<td>{{i.GB_FA_LAND_CATER}}</td>
+				<td>{{i.GB_CENTER_DIRECT}}</td>
+				<td>{{i.GB_INSTAL}}</td>
+				<td>{{i.GB_MANUFA}}</td>
+				<td>{{i.GB_MAINTE_COMP}}</td>
+				<td>{{i.DA_ID.DA_NAME}}</td>
+
+
+				<td><a href="{% url 'gi_update' %}?id={{i.id}}"><button class="btn btn-info">수정</button></a></td>
+				<td><button class="btn btn-danger" data-toggle="modal" data-target="#delmodal{{i.id}}">삭제</button></td>
+
+				<div class="modal fade" id="delmodal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">데이터 삭제</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <h5>데이터를 삭제하시겠습니까?</h5>
+				        <h6 class="text-danger">※삭제할시, 복원이 불가합니다. </h6>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				        <a href="{% url 'da_delete' i.id %}"><button type="button" class="btn btn-danger">데이터삭제</button></a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</tr>
+			
+		{% endfor %}
+		</tbody>
+		</table>
+	</div>
+{% endblock %}
