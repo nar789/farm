@@ -108,4 +108,204 @@ class work_info(models.Model):
 		return "work_info#%s" % self.id
 
 
+class mainte_info(models.Model):
+	WI_ID=models.ForeignKey(work_info)
+	GM_MAINTE_WORKE_DATE=models.DateTimeField(auto_now=False)
+	GM_FACITY_NAME=models.CharField(max_length=50)
+	GM_MAINTE_INFO=models.CharField(max_length=50)
+	GM_REPAIR_COST=models.IntegerField(null=True)
+
+	def __str__(self):
+		return "mainte_info#%s" % self.id
+
+class harves_info(models.Model):
+	GM_HARVES_ID=models.IntegerField(null=True)
+	GM_DATE_HARVES=models.DateTimeField(auto_now=False)
+	GM_HARVES_YIELD=models.FloatField(null=True)
+	GM_WEIGHT=models.FloatField(null=True)
+	GM_QUALIT_GRAD=models.CharField(max_length=10)
+	WI_ID=models.ForeignKey(work_info)
+
+	def __str__(self):
+		return "harves_info#%s" % self.id
+
+class after_harves_info(models.Model):
+	GM_LOT_NUM=models.IntegerField(null=True)
+	GM_INFO_PROCESS=models.CharField(max_length=50)
+	HI_ID=models.ForeignKey(harves_info)
+
+	def __str__(self):
+		return "after_harves_info#%s" % self.id
+
+class sale_info(models.Model):
+	GM_SALE_ID=models.IntegerField(null=True)
+	GM_SALE_DATE=models.DateField(auto_now=False)
+	GM_METHODS_SALE=models.CharField(max_length=30)
+	GM_PACK_UNIT=models.CharField(max_length=5)
+	GM_GALSE=models.FloatField(null=False)
+	GM_PRICE_BOX=models.IntegerField(null=False)
+	GM_TOTAL_INCOME=models.IntegerField(null=False)
+	HI_ID=models.ForeignKey(harves_info)
+
+	def __str__(self):
+		return "sale_info#%s" % self.id
+
+class plan_stages(models.Model):
+	PS_PLAN_CODE=models.IntegerField(null=False)
+	FI_ID=models.ForeignKey(e1model)
+	GI_ID=models.ForeignKey(gb_info)
+	
+	def __str__(self):
+		return "plan_stages#%s" % self.id
+
+class seedling_plan(models.Model):
+	SP_ID=models.IntegerField(null=False)
+	SP_DATE=models.DateField(auto_now=False)
+	SP_TRAY=models.IntegerField(null=False)
+	SP_GROW_MEDIA=models.CharField(max_length=50)
+	SP_PRODUCTION=models.IntegerField(null=False)
+	SP_SEEDING_DATE=models.DateField(auto_now=False)
+	SP_GRAFTING_DATE=models.DateField(auto_now=False)
+	SP_SCION_GRAFT=models.IntegerField(null=False)
+	SP_ROOT_GRAFT=models.IntegerField(null=False)
+	SP_GRAFT_TAKE=models.IntegerField(null=False)
+	SP_SHIPPING_DATE=models.DateField(auto_now=False)
+	PS_ID=models.ForeignKey(plan_stages)
+
+	def __str__(self):
+		return "seedling_plan#%s" % self.id
+
+class storage(models.Model):
+	ST_STORAGE_ID=models.IntegerField(null=False)
+	ST_TEMP=models.FloatField(null=False)
+	ST_PERIOD=models.IntegerField(null=False)
+	ST_QUALITY=models.CharField(max_length=100)
+	ST_RESP_COEF=models.IntegerField(null=False)
+	ST_RESP_RATE=models.IntegerField(null=False)
+	ST_RESP_LOSS=models.FloatField(null=False)
+	ST_SURV_RATE=models.FloatField(null=False)
+	PS_ID=models.ForeignKey(plan_stages)
+
+	def __str__(self):
+		return "storage#%s" % self.id
+
+class germination(models.Model):
+	GE_ID=models.IntegerField(null=False)
+	GE_RATE=models.FloatField(null=False)
+	GE_ENERGY=models.FloatField(null=False)
+	GE_DAYS=models.FloatField(null=False)
+	GE_UNIFORMITY=models.FloatField(null=False)
+	PS_ID=models.ForeignKey(plan_stages)
+
+	def __str__(self):
+		return "germination#%s" % self.id
+
+class grafting(models.Model):
+	GR_ID=models.IntegerField(null=False)
+	GR_TAKE_RATE=models.FloatField(null=False)
+	PS_ID=models.ForeignKey(plan_stages)
+
+	def __str__(self):
+		return "grafting#%s" % self.id
+
+
+class crop_info(models.Model):
+	CI_INFO_ID=models.IntegerField(null=False)
+	CI_VEGETABLES=models.CharField(max_length=100)
+	CI_NG_SEEDING_VAR=models.CharField(max_length=100)
+	CI_SCION_VAR=models.CharField(max_length=100)
+	CI_INFO_GATHER=models.IntegerField(null=False)
+	CI_GATHER_CODE=models.IntegerField(null=False)
+
+	def __str__(self):
+		return "crop_info#%s" % self.id
+
+class image_info(models.Model):
+	IMI_ID=models.IntegerField(null=False)
+	IMI_DEVICE_CODE=models.IntegerField(null=False)
+	IMI_SNAP_DATE=models.DateField(auto_now=False)
+	IMI_RESOLUTION=models.IntegerField(null=False)
+	IMI_IPIAI=models.CharField(max_length=255)
+	IMI_RAW_DATA=models.CharField(max_length=255)
+	CI_ID=models.ForeignKey(crop_info)
+
+	def __str__(self):
+		return "image_info#%s" % self.id
+
+
+class dip_info(models.Model):
+	DIP_ID=models.IntegerField(null=False)
+	D_ID=models.CharField(max_length=100)
+	I_ID=models.CharField(max_length=100)
+	P_ID=models.CharField(max_length=100)
+	CI_ID=models.ForeignKey(crop_info)
+
+	def __str__(self):
+		return "dip_info#%s" % self.id
+
+class nursery_info(models.Model):
+	NI_SEDDING_ID=models.IntegerField(null=False)
+	NI_PH=models.FloatField(null=False)
+	NI_LN=models.FloatField(null=False)
+	NI_LL=models.FloatField(null=False)
+	NI_LW=models.FloatField(null=False)
+	NI_HL=models.FloatField(null=False)
+	NI_HSD=models.FloatField(null=False)
+	NI_SDGP=models.FloatField(null=False)
+	NI_SDA=models.FloatField(null=False)
+	NI_FBN=models.IntegerField(null=False)
+	NI_FFN=models.IntegerField(null=False)
+	NI_PFW=models.FloatField(null=False)
+	NI_SFW=models.FloatField(null=False)
+	NI_LFW=models.FloatField(null=False)
+	NI_S_FRESH_W=models.FloatField(null=False)
+	NI_ROOT_FW=models.FloatField(null=False)
+	NI_PDW=models.FloatField(null=False)
+	NI_SDW=models.FloatField(null=False)
+	NI_L_DRY_W=models.FloatField(null=False)
+	NI_S_DRY_W=models.FloatField(null=False)
+	NI_ROOT_DRY_W=models.FloatField(null=False)
+	NI_SRR=models.FloatField(null=False)
+	NI_SC=models.FloatField(null=False)
+	NI_LA=models.FloatField(null=False)
+	NI_LAI=models.FloatField(null=False)
+	NI_LAR=models.FloatField(null=False)
+	NI_SLA=models.FloatField(null=False)
+	NI_LI=models.FloatField(null=False)
+	NI_LIE=models.FloatField(null=False)
+	NI_LIC=models.FloatField(null=False)
+	NI_REC=models.FloatField(null=False)
+	NI_RUE=models.FloatField(null=False)
+	NI_NPR=models.FloatField(null=False)
+	NI_STOMATAL_C=models.FloatField(null=False)
+	NI_TR=models.FloatField(null=False)
+	NI_CGR=models.FloatField(null=False)
+	NI_RGR=models.FloatField(null=False)
+	NI_LEAF_TEMP=models.FloatField(null=False)
+	NI_CC=models.FloatField(null=False)
+	NI_PWC=models.FloatField(null=False)
+	NI_IA=models.FloatField(null=False)
+	NI_APF=models.FloatField(null=False)
+	CI_ID=models.ForeignKey(crop_info)
+
+	def __str__(self):
+		return "nursery_info#%s" % self.id
+
+class seedling_date(models.Model):
+	SD_PROCESS_ID=models.IntegerField(null=False)
+	SD_START_DATE=models.DateField(auto_now=False)
+	SD_END_DATE=models.DateField(auto_now=False)
+	PS_ID=models.ForeignKey(plan_stages)
+	CI_ID=models.ForeignKey(crop_info)
+
+	def __str__(self):
+		return "seedling_date#%s" % self.id
+
+
+
+
+
+
+
+
 

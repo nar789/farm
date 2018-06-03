@@ -1,0 +1,77 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function csel(id) {
+			$('#c').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'ahi' %}"><i class="fas fa-arrow-left"></i></a> 수확후처리</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">로트번호</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">처리내용</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<input type=hidden id=c name="c" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    수확ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="csel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GM_HARVES_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.GM_DATE_HARVES}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'ahi' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m3.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.GM_LOT_NUM }}");
+	$("#b").val("{{ d.GM_INFO_PROCESS }}");
+	$("#c").val("{{ d.HI_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

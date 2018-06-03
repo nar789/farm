@@ -1,0 +1,97 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function asel(id) {
+			$('#a').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'mi' %}"><i class="fas fa-arrow-left"></i></a> 수리정보_유지보수</h2>
+	<hr>
+
+	<input type=hidden id=a name="a" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    작업ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="asel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GM_WORK_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.GM_WORK_INFO}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">정비일시</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="datetime-local" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시설명</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">정비내용</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=d name=d autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수리비용</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=e name=e autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'mi' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m3.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.WI_ID.id }}");
+	$("#b").val("{{ d.GM_MAINTE_WORKE_DATE }}");
+	$("#c").val("{{ d.GM_FACITY_NAME }}");
+	$("#d").val("{{ d.GM_MAINTE_INFO }}");
+	$("#e").val("{{ d.GM_REPAIR_COST }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
-from .models import e1model,com_infor,device_code,device_admin,gb_info,inner_gh_info,sensor_info,work_info
+from .models import e1model,com_infor,device_code,device_admin,gb_info,inner_gh_info,sensor_info,work_info,mainte_info,harves_info,after_harves_info,sale_info,plan_stages,seedling_plan,storage,germination,grafting,crop_info,image_info,dip_info,nursery_info,seedling_date
 # Create your views here.
 
 def index(request):
@@ -45,6 +45,9 @@ def elist(request):
 
 def clist(request):
 	return render(request,"farm/clist.html",{})
+
+def plist(request):
+	return render(request,"farm/plist.html",{})
 
 def e1(request):
 	ds=e1model.objects.all()
@@ -425,3 +428,180 @@ def wi_delete(request,eid):
 	getd=work_info.objects.get(id=eid)
 	getd.delete()
 	return redirect('wi')
+
+
+def mi(request):
+	ds=mainte_info.objects.all()
+	return render(request,"farm/mi.html",{"ds":ds})
+
+
+def mi_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=work_info.objects.get(id=a)
+
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=mainte_info.objects.get(id=eid)
+			getd.WI_ID=a
+			getd.GM_MAINTE_WORKE_DATE=b
+			getd.GM_FACITY_NAME=c
+			getd.GM_MAINTE_INFO=d
+			getd.GM_REPAIR_COST=e
+			getd.save()
+		else:
+			data=mainte_info(WI_ID=a,GM_MAINTE_WORKE_DATE=b,GM_FACITY_NAME=c,GM_MAINTE_INFO=d,GM_REPAIR_COST=e)
+			data.save()
+
+		return redirect('mi')
+	if 'id' in request.GET:
+		data=get_object_or_404(mainte_info,id=request.GET['id'])
+		ds1=work_info.objects.all()
+		return render(request,"farm/mi_update.html",{'d':data,'ds1':ds1})
+
+	ds1=work_info.objects.all()
+	return render(request,"farm/mi_update.html",{'ds1':ds1})
+
+def mi_delete(request,eid):
+	getd=mainte_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('mi')
+
+def hi(request):
+	ds=harves_info.objects.all()
+	return render(request,"farm/hi.html",{"ds":ds})
+
+
+def hi_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+
+		f=int(request.POST['f'])
+		f=work_info.objects.get(id=f)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=harves_info.objects.get(id=eid)
+			getd.GM_HARVES_ID=a
+			getd.GM_DATE_HARVES=b
+			getd.GM_HARVES_YIELD=c
+			getd.GM_WEIGHT=d
+			getd.GM_QUALIT_GRAD=e
+			getd.WI_ID=f
+			getd.save()
+		else:
+			data=harves_info(GM_HARVES_ID=a,GM_DATE_HARVES=b,GM_HARVES_YIELD=c,GM_WEIGHT=d,GM_QUALIT_GRAD=e,WI_ID=f)
+			data.save()
+
+		return redirect('hi')
+	if 'id' in request.GET:
+		data=get_object_or_404(harves_info,id=request.GET['id'])
+		ds1=work_info.objects.all()
+		return render(request,"farm/hi_update.html",{'d':data,'ds1':ds1})
+
+	ds1=work_info.objects.all()
+	return render(request,"farm/hi_update.html",{'ds1':ds1})
+
+def hi_delete(request,eid):
+	getd=harves_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('hi')
+
+def ahi(request):
+	ds=after_harves_info.objects.all()
+	return render(request,"farm/ahi.html",{"ds":ds})
+
+
+def ahi_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+
+		c=int(request.POST['c'])
+		c=harves_info.objects.get(id=c)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=after_harves_info.objects.get(id=eid)
+			getd.GM_LOT_NUM=a
+			getd.GM_INFO_PROCESS=b
+			getd.HI_ID=c
+			getd.save()
+		else:
+			data=after_harves_info(GM_LOT_NUM=a,GM_INFO_PROCESS=b,HI_ID=c)
+			data.save()
+
+		return redirect('ahi')
+	if 'id' in request.GET:
+		data=get_object_or_404(after_harves_info,id=request.GET['id'])
+		ds1=harves_info.objects.all()
+		return render(request,"farm/ahi_update.html",{'d':data,'ds1':ds1})
+
+	ds1=harves_info.objects.all()
+	return render(request,"farm/ahi_update.html",{'ds1':ds1})
+
+def ahi_delete(request,eid):
+	getd=after_harves_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('ahi')
+
+
+def gsi(request):
+	ds=sale_info.objects.all()
+	return render(request,"farm/gsi.html",{"ds":ds})
+
+
+def gsi_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		g=request.POST['g']
+		h=int(request.POST['h'])
+		h=harves_info.objects.get(id=h)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=sale_info.objects.get(id=eid)
+			getd.GM_SALE_ID=a
+			getd.GM_SALE_DATE=b
+			getd.GM_METHODS_SALE=c
+			getd.GM_PACK_UNIT=d
+			getd.GM_GALSE=e
+			getd.GM_PRICE_BOX=f
+			getd.GM_TOTAL_INCOME=g
+			getd.HI_ID=h
+			getd.save()
+		else:
+			data=sale_info(GM_SALE_ID=a,GM_SALE_DATE=b,GM_METHODS_SALE=c,GM_PACK_UNIT=d,GM_GALSE=e,GM_PRICE_BOX=f,GM_TOTAL_INCOME=g,HI_ID=h)
+			data.save()
+
+		return redirect('gsi')
+	if 'id' in request.GET:
+		data=get_object_or_404(sale_info,id=request.GET['id'])
+		ds1=harves_info.objects.all()
+		return render(request,"farm/gsi_update.html",{'d':data,'ds1':ds1})
+
+	ds1=harves_info.objects.all()
+	return render(request,"farm/gsi_update.html",{'ds1':ds1})
+
+def gsi_delete(request,eid):
+	getd=sale_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('gsi')

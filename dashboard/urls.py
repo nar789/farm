@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^logout$',views.logoutv,name='logout'),
 	url(r'^elist$',views.elist,name='elist'),
 	url(r'^clist$',views.clist,name='clist'),
+	url(r'^plist$',views.plist,name='plist'),
 
 	url(r'^e1$',views.e1,name='e1'),	
 	url(r'^e1/update$',views.e1update,name='e1update'),	
@@ -40,5 +41,21 @@ urlpatterns = [
 	url(r'^wi$',views.wi,name='wi'),	
 	url(r'^wi/update$',views.wi_update,name='wi_update'),	
 	url(r'^wi/delete/(\d+)/$',views.wi_delete,name='wi_delete'),		
+
+	url(r'^mi$',views.mi,name='mi'),	
+	url(r'^mi/update$',views.mi_update,name='mi_update'),	
+	url(r'^mi/delete/(\d+)/$',views.mi_delete,name='mi_delete'),		
+
+	url(r'^hi$',views.hi,name='hi'),	
+	url(r'^hi/update$',views.hi_update,name='hi_update'),	
+	url(r'^hi/delete/(\d+)/$',views.hi_delete,name='hi_delete'),		
+
+	url(r'^ahi$',views.ahi,name='ahi'),	
+	url(r'^ahi/update$',views.ahi_update,name='ahi_update'),	
+	url(r'^ahi/delete/(\d+)/$',views.ahi_delete,name='ahi_delete'),		
+
+	url(r'^gsi$',views.gsi,name='gsi'),	
+	url(r'^gsi/update$',views.gsi_update,name='gsi_update'),	
+	url(r'^gsi/delete/(\d+)/$',views.gsi_delete,name='gsi_delete'),		
 ]
 

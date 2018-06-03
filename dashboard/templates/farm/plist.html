@@ -1,0 +1,26 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/elist.css' %}" rel="stylesheet">
+	<div class="list-group">
+	  <a href="#" class="list-group-item list-group-item-action active">
+	    <i class="fas fa-list-ul"></i>&nbsp;식물정보
+	  </a>
+	  <a href="{% url 'mi' %}" class="list-group-item list-group-item-action">공정단계별</a>
+	  <a href="{% url 'wi' %}" class="list-group-item list-group-item-action">육묘계획</a>
+	  <a href="{% url 'hi' %}" class="list-group-item list-group-item-action">저장</a>
+	  <a href="{% url 'ahi' %}" class="list-group-item list-group-item-action">발아</a>
+	  <a href="{% url 'gsi' %}" class="list-group-item list-group-item-action">접목</a>
+	  <a href="{% url 'gsi' %}" class="list-group-item list-group-item-action">작물정보</a>
+	  <a href="{% url 'gsi' %}" class="list-group-item list-group-item-action">영상정보</a>
+	  <a href="{% url 'gsi' %}" class="list-group-item list-group-item-action">모종생산</a>
+	  <a href="{% url 'gsi' %}" class="list-group-item list-group-item-action">병해충정보</a>
+	  <a href="{% url 'gsi' %}" class="list-group-item list-group-item-action">육묘공정일</a>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+	<script src="{% static 'farm/js/m4.js' %}"></script>
+
+{% endblock %}

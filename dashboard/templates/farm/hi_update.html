@@ -1,0 +1,108 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function fsel(id) {
+			$('#f').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'hi' %}"><i class="fas fa-arrow-left"></i></a> 수확정보</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수확ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수확일시</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="datetime-local" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수량</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">무게</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=d name=d autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">품질등급</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=e name=e autofocus required/>
+			</div>
+		</div>
+	</div>
+
+
+	<input type=hidden id=f name="f" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    작업ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="fsel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GM_WORK_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.GM_WORK_INFO}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'hi' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m3.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.GM_HARVES_ID }}");
+	$("#b").val("{{ d.GM_DATE_HARVES }}");
+	$("#c").val("{{ d.GM_HARVES_YIELD }}");
+	$("#d").val("{{ d.GM_WEIGHT }}");
+	$("#e").val("{{ d.GM_QUALIT_GRAD }}");
+	$("#f").val("{{ d.WI_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}
