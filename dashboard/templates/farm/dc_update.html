@@ -38,8 +38,9 @@
      </div>
  	</center>
 </form>
-{% if d %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m2.js' %}"></script>
+{% if d %}
 <script>
 	$("#a").val("{{ d.DC_CODE }}");
 	$("#b").val("{{ d.DC_KIND }}");

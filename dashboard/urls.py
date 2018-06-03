@@ -7,6 +7,7 @@ urlpatterns = [
 	url(r'^login$',views.loginv,name='login'),
 	url(r'^logout$',views.logoutv,name='logout'),
 	url(r'^elist$',views.elist,name='elist'),
+	url(r'^clist$',views.clist,name='clist'),
 
 	url(r'^e1$',views.e1,name='e1'),	
 	url(r'^e1/update$',views.e1update,name='e1update'),	
@@ -27,5 +28,17 @@ urlpatterns = [
 	url(r'^gi$',views.gi,name='gi'),	
 	url(r'^gi/update$',views.gi_update,name='gi_update'),	
 	url(r'^gi/delete/(\d+)/$',views.gi_delete,name='gi_delete'),		
+
+	url(r'^igi$',views.igi,name='igi'),	
+	url(r'^igi/update$',views.igi_update,name='igi_update'),	
+	url(r'^igi/delete/(\d+)/$',views.igi_delete,name='igi_delete'),		
+
+	url(r'^si$',views.si,name='si'),	
+	url(r'^si/update$',views.si_update,name='si_update'),	
+	url(r'^si/delete/(\d+)/$',views.si_delete,name='si_delete'),		
+
+	url(r'^wi$',views.wi,name='wi'),	
+	url(r'^wi/update$',views.wi_update,name='wi_update'),	
+	url(r'^wi/delete/(\d+)/$',views.wi_delete,name='wi_delete'),		
 ]
 

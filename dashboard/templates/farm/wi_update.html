@@ -1,0 +1,159 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function isel(id) {
+			$('#i').val(id);
+		}
+		function jsel(id) {
+			$('#j').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'wi' %}"><i class="fas fa-arrow-left"></i></a> 작업정보</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작업ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작업일시</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="date" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">라인번호</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작업시간</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="time" class="form-control" id=d name=d autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작업내용</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=e name=e autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">투입농자재</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=f name=f autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작업코드</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=g name=g autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작업의견</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=h name=h autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<input type=hidden id=i name="i" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    농가경영체ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="isel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GB_FA_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.GB_FA_NAME}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	<input type=hidden id=j name="j" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    시설번호
+	  </button>
+	  {% for i in ds2 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="jsel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GB_NUMBER}}</td>
+	  			<td style="padding-left: 20px;">{{i.GB_KIND_CODE}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'igi' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m3.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.GM_WORK_ID }}");
+	$("#b").val("{{ d.GM_WORK_DATE }}");
+	$("#c").val("{{ d.GM_WORK_LINE_NUM }}");
+	$("#d").val("{{ d.GM_LABOR_TIME }}");
+	$("#e").val("{{ d.GM_WORK_INFO }}");
+	$("#f").val("{{ d.GM_AGRI_MTRI_IN_WORK }}");
+	$("#g").val("{{ d.GM_WORK_CODE }}");
+	$("#h").val("{{ d.GM_WORK_OP }}");
+	$("#i").val("{{ d.FI_ID.id }}");
+	$("#j").val("{{ d.CI_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

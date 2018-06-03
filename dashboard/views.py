@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
-from .models import e1model,com_infor,device_code,device_admin,gb_info,inner_gh_info,sensor_info
+from .models import e1model,com_infor,device_code,device_admin,gb_info,inner_gh_info,sensor_info,work_info
 # Create your views here.
 
 def index(request):
@@ -42,6 +42,9 @@ def logoutv(request):
 
 def elist(request):
 	return render(request,"farm/elist.html",{})
+
+def clist(request):
+	return render(request,"farm/clist.html",{})
 
 def e1(request):
 	ds=e1model.objects.all()
@@ -264,3 +267,161 @@ def gi_delete(request,eid):
 	return redirect('gi')
 
 
+
+def igi(request):
+	ds=inner_gh_info.objects.all()
+	return render(request,"farm/igi.html",{"ds":ds})
+
+
+def igi_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		c=int(request.POST['c'])
+		c=gb_info.objects.get(id=c)
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		g=request.POST['g']
+
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=inner_gh_info.objects.get(id=eid)
+			getd.GB_DONG_NUMBER=a
+			getd.GB_INFO_ID=c
+			getd.GB_KIND_CROP=d
+			getd.GB_INNER_SIZE=e
+			getd.GB_INNER_KIND=f
+			getd.GB_INNER_DEVI_LOC=g
+			getd.save()
+		else:
+			data=inner_gh_info(GB_DONG_NUMBER=a,GB_INFO_ID=c,GB_KIND_CROP=d,GB_INNER_SIZE=e,GB_INNER_KIND=f,GB_INNER_DEVI_LOC=g)
+			data.save()
+
+		return redirect('igi')
+	if 'id' in request.GET:
+		data=get_object_or_404(inner_gh_info,id=request.GET['id'])
+		ds=gb_info.objects.all()
+		return render(request,"farm/igi_update.html",{'d':data,'ds':ds})
+
+	ds=gb_info.objects.all()
+	return render(request,"farm/igi_update.html",{'ds':ds})
+
+
+def igi_delete(request,eid):
+	getd=inner_gh_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('igi')
+
+
+def si(request):
+	ds=sensor_info.objects.all()
+	return render(request,"farm/si.html",{"ds":ds})
+
+
+def si_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		
+		d=int(request.POST['d'])
+		d=device_code.objects.get(id=d)
+
+		e=int(request.POST['e'])
+		e=com_infor.objects.get(id=e)
+
+		f=int(request.POST['f'])
+		f=inner_gh_info.objects.get(id=f)		
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=sensor_info.objects.get(id=eid)
+			getd.SI_ID=a
+			getd.SI_KIND=b
+			getd.SI_ACTU_CODE=c
+			getd.DC_ID=d
+			getd.CI_ID=e
+			getd.IGI_ID=f
+			getd.save()
+		else:
+			data=sensor_info(SI_ID=a,SI_KIND=b,SI_ACTU_CODE=c,DC_ID=d,CI_ID=e,IGI_ID=f)
+			data.save()
+
+		return redirect('si')
+	if 'id' in request.GET:
+		data=get_object_or_404(sensor_info,id=request.GET['id'])
+		ds1=device_code.objects.all()
+		ds2=com_infor.objects.all()
+		ds3=inner_gh_info.objects.all()
+		return render(request,"farm/si_update.html",{'d':data,'ds1':ds1,'ds2':ds2,'ds3':ds3})
+
+	ds1=device_code.objects.all()
+	ds2=com_infor.objects.all()
+	ds3=inner_gh_info.objects.all()
+	return render(request,"farm/si_update.html",{'ds1':ds1,'ds2':ds2,'ds3':ds3})
+
+
+def si_delete(request,eid):
+	getd=sensor_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('si')
+
+
+def wi(request):
+	ds=work_info.objects.all()
+	return render(request,"farm/wi.html",{"ds":ds})
+
+
+def wi_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		g=request.POST['g']
+		h=request.POST['h']
+		
+		i=int(request.POST['i'])
+		i=e1model.objects.get(id=i)
+
+		j=int(request.POST['j'])
+		j=gb_info.objects.get(id=j)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=work_info.objects.get(id=eid)
+			getd.GM_WORK_ID=a
+			getd.GM_WORK_DATE=b
+			getd.GM_WORK_LINE_NUM=c
+			getd.GM_LABOR_TIME=d
+			getd.GM_WORK_INFO=e
+			getd.GM_AGRI_MTRI_IN_WORK=f
+			getd.GM_WORK_CODE=g
+			getd.GM_WORK_OP=h
+			getd.FI_ID=i
+			getd.CI_ID=j
+			getd.save()
+		else:
+			data=work_info(GM_WORK_ID=a,GM_WORK_DATE=b,GM_WORK_LINE_NUM=c,GM_LABOR_TIME=d,GM_WORK_INFO=e,GM_AGRI_MTRI_IN_WORK=f,GM_WORK_CODE=g,GM_WORK_OP=h,FI_ID=i,CI_ID=j)
+			data.save()
+
+		return redirect('wi')
+	if 'id' in request.GET:
+		data=get_object_or_404(work_info,id=request.GET['id'])
+		ds1=e1model.objects.all()
+		ds2=gb_info.objects.all()
+		return render(request,"farm/wi_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
+
+	ds1=e1model.objects.all()
+	ds2=gb_info.objects.all()
+	return render(request,"farm/wi_update.html",{'ds1':ds1,'ds2':ds2})
+
+def wi_delete(request,eid):
+	getd=work_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('wi')

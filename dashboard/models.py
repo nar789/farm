@@ -91,3 +91,21 @@ class sensor_info(models.Model):
 
 	def __str__(self):
 		return "sensor_info$%s" % self.id
+
+class work_info(models.Model):
+	GM_WORK_ID=models.IntegerField(null=True)
+	GM_WORK_DATE=models.DateField(auto_now=False)
+	GM_WORK_LINE_NUM=models.IntegerField(null=True)
+	GM_LABOR_TIME=models.TimeField(auto_now=False)
+	GM_WORK_INFO=models.CharField(max_length=50)
+	GM_AGRI_MTRI_IN_WORK=models.CharField(max_length=50)
+	GM_WORK_CODE=models.CharField(max_length=5)
+	GM_WORK_OP=models.CharField(max_length=50)
+	FI_ID=models.ForeignKey(e1model)
+	CI_ID=models.ForeignKey(gb_info)
+
+	def __str__(self):
+		return "work_info#%s" % self.id
+
+
+

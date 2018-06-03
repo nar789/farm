@@ -1,0 +1,21 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/elist.css' %}" rel="stylesheet">
+	<div class="list-group">
+	  <a href="#" class="list-group-item list-group-item-action active">
+	    <i class="fas fa-list-ul"></i>&nbsp;경영시설정보
+	  </a>
+	  <a href="#" class="list-group-item list-group-item-action">수리정비/유지보수</a>
+	  <a href="{% url 'wi' %}" class="list-group-item list-group-item-action">작업정보</a>
+	  <a href="#" class="list-group-item list-group-item-action">수확정보</a>
+	  <a href="#" class="list-group-item list-group-item-action">수확후처리</a>
+	  <a href="#" class="list-group-item list-group-item-action">판매정보</a>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+	<script src="{% static 'farm/js/m3.js' %}"></script>
+
+{% endblock %}

@@ -42,41 +42,42 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}" id=navhome>
+                <a class="nav-link active" href="{% url 'index' %}" id=m1>
                   <span data-feather="home"></span>
                   대시보드 <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'elist' %}" id=nave>
+                <a class="nav-link" href="{% url 'elist' %}" id=m2>
                   <span data-feather="file"></span>
                   경영체정보
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'elist' %}">
+                <a class="nav-link" href="{% url 'clist' %}" id=m3>
                   <span data-feather="shopping-cart"></span>
                   경영시설정보
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'elist' %}">
+                <a class="nav-link" href="{% url 'elist' %}" id=m4>
                   <span data-feather="users"></span>
                   식물정보
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'elist' %}">
+                <a class="nav-link" href="{% url 'elist' %}" id=m5>
                   <span data-feather="bar-chart-2"></span>
                   환경정보
                 </a>
               </li>
+              <!--
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'elist' %}">
+                <a class="nav-link" href="{% url 'elist' %}" id=m6>
                   <span data-feather="layers"></span>
                   통합
                 </a>
-              </li>
+              </li>//-->
             </ul>
           </div>
         </nav>
