@@ -1,0 +1,116 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function gsel(id) {
+			$('#g').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'ii' %}"><i class="fas fa-arrow-left"></i></a> 영상정보</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">영상정보ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">영상기기코드</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">촬영일</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="date" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">해상도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=d name=d autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">식물체 분석지수</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=e name=e autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">영상데이터</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=f name=f autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<input type=hidden id=g name="g" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    작물정보ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="gsel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.CI_INFO_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.CI_VEGETABLES}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'ii' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m4.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.IMI_ID }}");
+	$("#b").val("{{ d.IMI_DEVICE_CODE }}");
+	$("#c").val("{{ d.IMI_SNAP_DATE }}");
+	$("#d").val("{{ d.IMI_RESOLUTION }}");
+	$("#e").val("{{ d.IMI_IPIAI }}");
+	$("#f").val("{{ d.IMI_RAW_DATA }}");
+	$("#g").val("{{ d.CI_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

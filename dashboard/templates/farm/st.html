@@ -1,0 +1,77 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="{% static 'farm/css/e1.css' %}" rel="stylesheet">	
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+
+
+	<div class=tg>
+		<h3><a href="{% url 'plist' %}"><i class="fas fa-arrow-left"></i></a> 저장</h3>		
+		<hr>
+		<a href="{% url 'st_update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 추가</button></a>
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">ID</th>
+		      <th scope="col">저장ID</th>
+		      <th scope="col">저장온도</th>
+		      <th scope="col">저장기간</th>
+		      <th scope="col">저장성</th>
+		      <th scope="col">호흡계수</th>
+		      <th scope="col">호흡속도</th>
+		      <th scope="col">호흡손실</th>
+		      <th scope="col">생존율</th>
+		      <th scope="col">공정단계코드</th>
+		      <th scope="col">수정</th>	
+		      <th scope="col">삭제</th>	
+		    </tr>
+		  </thead>
+		  <tbody>
+	 
+		{% for i in ds %}
+			
+			<tr>
+				<td>{{i.id}}</td>
+				<td>{{i.ST_STORAGE_ID}}</td>
+				<td>{{i.ST_TEMP}}</td>
+				<td>{{i.ST_PERIOD}}</td>
+				<td>{{i.ST_QUALITY}}</td>
+				<td>{{i.ST_RESP_COEF}}</td>
+				<td>{{i.ST_RESP_RATE}}</td>
+				<td>{{i.ST_RESP_LOSS}}</td>
+				<td>{{i.ST_SURV_RATE}}</td>
+				<td>{{i.PS_ID.PS_PLAN_CODE}}</td>
+		
+
+				<td><a href="{% url 'st_update' %}?id={{i.id}}"><button class="btn btn-info">수정</button></a></td>
+				<td><button class="btn btn-danger" data-toggle="modal" data-target="#delmodal{{i.id}}">삭제</button></td>
+
+				<div class="modal fade" id="delmodal{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">데이터 삭제</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <h5>데이터를 삭제하시겠습니까?</h5>
+				        <h6 class="text-danger">※삭제할시, 복원이 불가합니다. </h6>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				        <a href="{% url 'st_delete' i.id %}"><button type="button" class="btn btn-danger">데이터삭제</button></a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</tr>
+			
+		{% endfor %}
+		</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="{% static 'farm/js/m4.js' %}"></script>
+{% endblock %}

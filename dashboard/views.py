@@ -605,3 +605,463 @@ def gsi_delete(request,eid):
 	getd=sale_info.objects.get(id=eid)
 	getd.delete()
 	return redirect('gsi')
+
+def ps(request):
+	ds=plan_stages.objects.all()
+	return render(request,"farm/ps.html",{"ds":ds})
+
+
+def ps_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=int(request.POST['b'])
+		b=e1model.objects.get(id=b)
+		c=int(request.POST['c'])
+		c=gb_info.objects.get(id=c)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=plan_stages.objects.get(id=eid)
+			getd.PS_PLAN_CODE=a
+			getd.FI_ID=b
+			getd.GI_ID=c
+			getd.save()
+		else:
+			data=plan_stages(PS_PLAN_CODE=a,FI_ID=b,GI_ID=c)
+			data.save()
+
+		return redirect('ps')
+	if 'id' in request.GET:
+		data=get_object_or_404(plan_stages,id=request.GET['id'])
+		ds1=e1model.objects.all()
+		ds2=gb_info.objects.all()
+		return render(request,"farm/ps_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
+
+	ds1=e1model.objects.all()
+	ds2=gb_info.objects.all()
+	return render(request,"farm/ps_update.html",{'ds1':ds1,'ds2':ds2})
+
+def ps_delete(request,eid):
+	getd=plan_stages.objects.get(id=eid)
+	getd.delete()
+	return redirect('ps')
+
+
+def sp(request):
+	ds=seedling_plan.objects.all()
+	return render(request,"farm/sp.html",{"ds":ds})
+
+
+def sp_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		g=request.POST['g']
+		h=request.POST['h']
+		i=request.POST['i']
+		j=request.POST['j']
+		k=request.POST['k']
+
+		l=int(request.POST['l'])
+		l=plan_stages.objects.get(id=l)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=seedling_plan.objects.get(id=eid)
+			getd.SP_ID=a
+			getd.SP_DATE=b
+			getd.SP_TRAY=c
+			getd.SP_GROW_MEDIA=d
+			getd.SP_PRODUCTION=e
+			getd.SP_SEEDING_DATE=f
+			getd.SP_GRAFTING_DATE=g
+			getd.SP_SCION_GRAFT=h
+			getd.SP_ROOT_GRAFT=i
+			getd.SP_GRAFT_TAKE=j
+			getd.SP_SHIPPING_DATE=k
+			getd.PS_ID=l
+			getd.save()
+		else:
+			data=seedling_plan(SP_ID=a,SP_DATE=b,SP_TRAY=c,SP_GROW_MEDIA=d,SP_PRODUCTION=e,SP_SEEDING_DATE=f,SP_GRAFTING_DATE=g,SP_SCION_GRAFT=h,SP_ROOT_GRAFT=i,SP_GRAFT_TAKE=j,SP_SHIPPING_DATE=k,PS_ID=l)
+			data.save()
+
+		return redirect('sp')
+	if 'id' in request.GET:
+		data=get_object_or_404(seedling_plan,id=request.GET['id'])
+		ds1=plan_stages.objects.all()
+		return render(request,"farm/sp_update.html",{'d':data,'ds1':ds1})
+
+	ds1=plan_stages.objects.all()
+	return render(request,"farm/sp_update.html",{'ds1':ds1})
+
+def sp_delete(request,eid):
+	getd=seedling_plan.objects.get(id=eid)
+	getd.delete()
+	return redirect('sp')
+
+
+def st(request):
+	ds=storage.objects.all()
+	return render(request,"farm/st.html",{"ds":ds})
+
+
+def st_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		g=request.POST['g']
+		h=request.POST['h']
+
+		i=int(request.POST['i'])
+		i=plan_stages.objects.get(id=i)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=storage.objects.get(id=eid)
+			getd.ST_STORAGE_ID=a
+			getd.ST_TEMP=b
+			getd.ST_PERIOD=c
+			getd.ST_QUALITY=d
+			getd.ST_RESP_COEF=e
+			getd.ST_RESP_RATE=f
+			getd.ST_RESP_LOSS=g
+			getd.ST_SURV_RATE=h
+			getd.PS_ID=i
+			getd.save()
+		else:
+			data=storage(ST_STORAGE_ID=a,ST_TEMP=b,ST_PERIOD=c,ST_QUALITY=d,ST_RESP_COEF=e,ST_RESP_RATE=f,ST_RESP_LOSS=g,ST_SURV_RATE=h,PS_ID=i)
+			data.save()
+
+		return redirect('st')
+	if 'id' in request.GET:
+		data=get_object_or_404(storage,id=request.GET['id'])
+		ds1=plan_stages.objects.all()
+		return render(request,"farm/st_update.html",{'d':data,'ds1':ds1})
+
+	ds1=plan_stages.objects.all()
+	return render(request,"farm/st_update.html",{'ds1':ds1})
+
+def st_delete(request,eid):
+	getd=storage.objects.get(id=eid)
+	getd.delete()
+	return redirect('st')
+
+
+def ge(request):
+	ds=germination.objects.all()
+	return render(request,"farm/ge.html",{"ds":ds})
+
+
+def ge_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+
+		f=int(request.POST['f'])
+		f=plan_stages.objects.get(id=f)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=germination.objects.get(id=eid)
+			getd.GE_ID=a
+			getd.GE_RATE=b
+			getd.GE_ENERGY=c
+			getd.GE_DAYS=d
+			getd.GE_UNIFORMITY=e
+			getd.PS_ID=f
+			getd.save()
+		else:
+			data=germination(GE_ID=a,GE_RATE=b,GE_ENERGY=c,GE_DAYS=d,GE_UNIFORMITY=e,PS_ID=f)
+			data.save()
+
+		return redirect('ge')
+	if 'id' in request.GET:
+		data=get_object_or_404(germination,id=request.GET['id'])
+		ds1=plan_stages.objects.all()
+		return render(request,"farm/ge_update.html",{'d':data,'ds1':ds1})
+
+	ds1=plan_stages.objects.all()
+	return render(request,"farm/ge_update.html",{'ds1':ds1})
+
+def ge_delete(request,eid):
+	getd=germination.objects.get(id=eid)
+	getd.delete()
+	return redirect('ge')
+
+
+def gr(request):
+	ds=grafting.objects.all()
+	return render(request,"farm/gr.html",{"ds":ds})
+
+
+def gr_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=int(request.POST['c'])
+		c=plan_stages.objects.get(id=c)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=grafting.objects.get(id=eid)
+			getd.GR_ID=a
+			getd.GR_TAKE_RATE=b
+			getd.PS_ID=c
+			getd.save()
+		else:
+			data=grafting(GR_ID=a,GR_TAKE_RATE=b,PS_ID=c)
+			data.save()
+
+		return redirect('gr')
+	if 'id' in request.GET:
+		data=get_object_or_404(grafting,id=request.GET['id'])
+		ds1=plan_stages.objects.all()
+		return render(request,"farm/gr_update.html",{'d':data,'ds1':ds1})
+
+	ds1=plan_stages.objects.all()
+	return render(request,"farm/gr_update.html",{'ds1':ds1})
+
+def gr_delete(request,eid):
+	getd=grafting.objects.get(id=eid)
+	getd.delete()
+	return redirect('gr')
+
+
+def cr(request):
+	ds=crop_info.objects.all()
+	return render(request,"farm/cr.html",{"ds":ds})
+
+
+def cr_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=crop_info.objects.get(id=eid)
+			getd.CI_INFO_ID=a
+			getd.CI_VEGETABLES=b
+			getd.CI_NG_SEEDING_VAR=c
+			getd.CI_SCION_VAR=d
+			getd.CI_INFO_GATHER=e
+			getd.CI_GATHER_CODE=f
+			getd.save()
+		else:
+			data=crop_info(CI_INFO_ID=a,CI_VEGETABLES=b,CI_NG_SEEDING_VAR=c,CI_SCION_VAR=d,CI_INFO_GATHER=e,CI_GATHER_CODE=f)
+			data.save()
+
+		return redirect('cr')
+	if 'id' in request.GET:
+		data=get_object_or_404(crop_info,id=request.GET['id'])
+		return render(request,"farm/cr_update.html",{'d':data})
+
+	return render(request,"farm/cr_update.html",{})
+
+def cr_delete(request,eid):
+	getd=crop_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('cr')
+
+def ii(request):
+	ds=image_info.objects.all()
+	return render(request,"farm/ii.html",{"ds":ds})
+
+
+def ii_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=request.POST['e']
+		f=request.POST['f']
+		g=int(request.POST['g'])
+		g=crop_info.objects.get(id=g)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=image_info.objects.get(id=eid)
+			getd.IMI_ID=a
+			getd.IMI_DEVICE_CODE=b
+			getd.IMI_SNAP_DATE=c
+			getd.IMI_RESOLUTION=d
+			getd.IMI_IPIAI=e
+			getd.IMI_RAW_DATA=f
+			getd.CI_ID=g
+			getd.save()
+		else:
+			data=image_info(IMI_ID=a,IMI_DEVICE_CODE=b,IMI_SNAP_DATE=c,IMI_RESOLUTION=d,IMI_IPIAI=e,IMI_RAW_DATA=f,CI_ID=g)
+			data.save()
+
+		return redirect('ii')
+	if 'id' in request.GET:
+		data=get_object_or_404(image_info,id=request.GET['id'])
+		ds1=crop_info.objects.all()
+		return render(request,"farm/ii_update.html",{'d':data,'ds1':ds1})
+
+	ds1=crop_info.objects.all()
+	return render(request,"farm/ii_update.html",{'ds1':ds1})
+
+def ii_delete(request,eid):
+	getd=image_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('ii')
+
+
+def dip(request):
+	ds=dip_info.objects.all()
+	return render(request,"farm/dip.html",{"ds":ds})
+
+
+def dip_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+		e=int(request.POST['e'])
+		e=crop_info.objects.get(id=e)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=dip_info.objects.get(id=eid)
+			getd.DIP_ID=a
+			getd.D_ID=b
+			getd.I_ID=c
+			getd.P_ID=d
+			getd.CI_ID=e
+			getd.save()
+		else:
+			data=dip_info(DIP_ID=a,D_ID=b,I_ID=c,P_ID=d,CI_ID=e)
+			data.save()
+
+		return redirect('dip')
+	if 'id' in request.GET:
+		data=get_object_or_404(dip_info,id=request.GET['id'])
+		ds1=crop_info.objects.all()
+		return render(request,"farm/dip_update.html",{'d':data,'ds1':ds1})
+
+	ds1=crop_info.objects.all()
+	return render(request,"farm/dip_update.html",{'ds1':ds1})
+
+def dip_delete(request,eid):
+	getd=dip_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('dip')
+
+
+def sd(request):
+	ds=seedling_date.objects.all()
+	return render(request,"farm/sd.html",{"ds":ds})
+
+
+def sd_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		
+		d=int(request.POST['d'])
+		d=plan_stages.objects.get(id=d)
+
+		e=int(request.POST['e'])
+		e=crop_info.objects.get(id=e)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=seedling_date.objects.get(id=eid)
+			getd.SD_PROCESS_ID=a
+			getd.SD_START_DATE=b
+			getd.SD_END_DATE=c
+			getd.PS_ID=d
+			getd.CI_ID=e
+			getd.save()
+		else:
+			data=seedling_date(SD_PROCESS_ID=a,SD_START_DATE=b,SD_END_DATE=c,PS_ID=d,CI_ID=e)
+			data.save()
+
+		return redirect('sd')
+	if 'id' in request.GET:
+		data=get_object_or_404(seedling_date,id=request.GET['id'])
+		ds1=plan_stages.objects.all()
+		ds2=crop_info.objects.all()
+		return render(request,"farm/sd_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
+
+	ds1=plan_stages.objects.all()
+	ds2=crop_info.objects.all()
+	return render(request,"farm/sd_update.html",{'ds1':ds1,'ds2':ds2})
+
+def sd_delete(request,eid):
+	getd=seedling_date.objects.get(id=eid)
+	getd.delete()
+	return redirect('sd')
+
+
+
+def ni(request):
+	ds=nursery_info.objects.all()
+	return render(request,"farm/ni.html",{"ds":ds})
+
+
+def ni_update(request):
+	if request.method=="POST":
+		a=request.POST['a']
+		b=request.POST['b']
+		c=request.POST['c']
+		d=request.POST['d']
+
+		e=int(request.POST['e'])
+		e=crop_info.objects.get(id=e)
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=nursery_info.objects.get(id=eid)
+			getd.NI_SEDDING_ID=a
+			getd.NI_PH=b
+			getd.NI_LN=c
+			getd.NI_LL=d
+			getd.CI_ID=e
+			getd.save()
+		else:
+			data=nursery_info(NI_SEDDING_ID=a,NI_PH=b,NI_LN=c,NI_LL=d,CI_ID=e)
+			data.save()
+
+		return redirect('ni')
+	if 'id' in request.GET:
+		data=get_object_or_404(nursery_info,id=request.GET['id'])
+		ds1=crop_info.objects.all()
+		return render(request,"farm/ni_update.html",{'d':data,'ds1':ds1})
+
+	ds1=crop_info.objects.all()
+	return render(request,"farm/ni_update.html",{'ds1':ds1})
+
+def ni_delete(request,eid):
+	getd=nursery_info.objects.get(id=eid)
+	getd.delete()
+	return redirect('ni')

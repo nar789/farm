@@ -1,0 +1,136 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function isel(id) {
+			$('#i').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'sp' %}"><i class="fas fa-arrow-left"></i></a> 육묘계획</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">저장ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">저장온도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">저장기간</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">저장성</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="text" class="form-control" id=d name=d autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">호흡계수</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=e name=e autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">호흡속도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f name=f autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">호흡손실</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=g name=g autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">생존율</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=h name=h autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<input type=hidden id=i name="i" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    공정단계코드
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="isel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.PS_PLAN_CODE}}</td>
+	  			<td style="padding-left: 20px;">{{i.GI_ID.GB_NUMBER}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'st' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m4.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.ST_STORAGE_ID }}");
+	$("#b").val("{{ d.ST_TEMP }}");
+	$("#c").val("{{ d.ST_PERIOD }}");
+	$("#d").val("{{ d.ST_QUALITY }}");
+	$("#e").val("{{ d.ST_RESP_COEF }}");
+	$("#f").val("{{ d.ST_RESP_RATE }}");
+	$("#g").val("{{ d.ST_RESP_LOSS }}");
+	$("#h").val("{{ d.ST_SURV_RATE }}");
+	$("#l").val("{{ d.PS_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

@@ -57,5 +57,45 @@ urlpatterns = [
 	url(r'^gsi$',views.gsi,name='gsi'),	
 	url(r'^gsi/update$',views.gsi_update,name='gsi_update'),	
 	url(r'^gsi/delete/(\d+)/$',views.gsi_delete,name='gsi_delete'),		
+
+	url(r'^ps$',views.ps,name='ps'),	
+	url(r'^ps/update$',views.ps_update,name='ps_update'),	
+	url(r'^ps/delete/(\d+)/$',views.ps_delete,name='ps_delete'),		
+
+	url(r'^sp$',views.sp,name='sp'),	
+	url(r'^sp/update$',views.sp_update,name='sp_update'),	
+	url(r'^sp/delete/(\d+)/$',views.sp_delete,name='sp_delete'),		
+
+	url(r'^st$',views.st,name='st'),	
+	url(r'^st/update$',views.st_update,name='st_update'),	
+	url(r'^st/delete/(\d+)/$',views.st_delete,name='st_delete'),		
+
+	url(r'^ge$',views.ge,name='ge'),	
+	url(r'^ge/update$',views.ge_update,name='ge_update'),	
+	url(r'^ge/delete/(\d+)/$',views.ge_delete,name='ge_delete'),		
+
+	url(r'^gr$',views.gr,name='gr'),	
+	url(r'^gr/update$',views.gr_update,name='gr_update'),	
+	url(r'^gr/delete/(\d+)/$',views.gr_delete,name='gr_delete'),		
+
+	url(r'^cr$',views.cr,name='cr'),	
+	url(r'^cr/update$',views.cr_update,name='cr_update'),	
+	url(r'^cr/delete/(\d+)/$',views.cr_delete,name='cr_delete'),		
+
+	url(r'^ii$',views.ii,name='ii'),	
+	url(r'^ii/update$',views.ii_update,name='ii_update'),	
+	url(r'^ii/delete/(\d+)/$',views.ii_delete,name='ii_delete'),		
+
+	url(r'^dip$',views.dip,name='dip'),	
+	url(r'^dip/update$',views.dip_update,name='dip_update'),	
+	url(r'^dip/delete/(\d+)/$',views.dip_delete,name='dip_delete'),	
+
+	url(r'^sd$',views.sd,name='sd'),	
+	url(r'^sd/update$',views.sd_update,name='sd_update'),	
+	url(r'^sd/delete/(\d+)/$',views.sd_delete,name='sd_delete'),	
+
+	url(r'^ni$',views.ni,name='ni'),	
+	url(r'^ni/update$',views.ni_update,name='ni_update'),	
+	url(r'^ni/delete/(\d+)/$',views.ni_delete,name='ni_delete'),	
 ]
 

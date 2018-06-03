@@ -248,6 +248,7 @@ class nursery_info(models.Model):
 	NI_PH=models.FloatField(null=False)
 	NI_LN=models.FloatField(null=False)
 	NI_LL=models.FloatField(null=False)
+	"""
 	NI_LW=models.FloatField(null=False)
 	NI_HL=models.FloatField(null=False)
 	NI_HSD=models.FloatField(null=False)
@@ -286,6 +287,7 @@ class nursery_info(models.Model):
 	NI_PWC=models.FloatField(null=False)
 	NI_IA=models.FloatField(null=False)
 	NI_APF=models.FloatField(null=False)
+	"""
 	CI_ID=models.ForeignKey(crop_info)
 
 	def __str__(self):

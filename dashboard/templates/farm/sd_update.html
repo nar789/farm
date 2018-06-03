@@ -1,0 +1,109 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function dsel(id) {
+			$('#d').val(id);
+		}
+		function esel(id) {
+			$('#e').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'sd' %}"><i class="fas fa-arrow-left"></i></a> 육묘공정일</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">육묘공정ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">공정시작일</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="date" class="form-control" id=b name=b autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">공정종료일</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="date" class="form-control" id=c name=c autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<input type=hidden id=d name="d" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    공정단계코드
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="dsel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.PS_PLAN_CODE}}</td>
+	  			<td style="padding-left: 20px;">{{i.FI_ID.GB_FA_ID}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	
+
+	<input type=hidden id=e name="e" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    작물정보ID
+	  </button>
+	  {% for i in ds2 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="esel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.CI_INFO_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.CI_VEGETABLES}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'sd' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m4.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.SD_PROCESS_ID }}");
+	$("#b").val("{{ d.SD_START_DATE }}");
+	$("#c").val("{{ d.SD_END_DATE }}");
+	$("#d").val("{{ d.PS_ID.id }}");
+	$("#e").val("{{ d.CI_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}

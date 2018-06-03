@@ -1,0 +1,88 @@
+{% extends 'farm/base.html' %}
+{% block content %}
+{% load staticfiles %}
+	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
+	<script>
+		function bsel(id) {
+			$('#b').val(id);
+		}
+		function csel(id) {
+			$('#c').val(id);
+		}
+	</script>
+
+
+<form class="form-horizontal" method="post">
+	{% csrf_token %}
+	<h2 class="form-signin-heading"><a href="{% url 'ps' %}"><i class="fas fa-arrow-left"></i></a> 공정단계별</h2>
+	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">공정단계코드</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=a name=a autofocus required/>
+			</div>
+		</div>
+	</div>	
+
+	<input type=hidden id=b name="b" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    농가경영체ID
+	  </button>
+	  {% for i in ds1 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="bsel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GB_FA_ID}}</td>
+	  			<td style="padding-left: 20px;">{{i.GB_FA_NAME}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	<input type=hidden id=c name="c" />
+	<hr>
+	<div class="list-group">
+	  <button type="button" class="list-group-item list-group-item-action active">
+	    시설번호
+	  </button>
+	  {% for i in ds2 %}
+	  	<button type="button" class="list-group-item list-group-item-action" onclick="csel({{i.id}})">
+	  		<table width="100%" class="right"><tr>
+	  			<td width="10%" class="border-right">{{i.GB_NUMBER}}</td>
+	  			<td style="padding-left: 20px;">{{i.GB_KIND_CODE}}</td>
+	  		</tr></table>
+	  	</button>
+	  {% endfor %}
+	</div>
+	<hr>
+
+	
+	<br>
+	<input type=hidden id=eid value="0" name=eid>
+	<div class="form-group" id=signup-group>
+		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
+	</div>
+	<center>
+	<div class="login-register">
+        <a href="{% url 'ps' %}">목록으로</a>
+     </div>
+ 	</center>
+</form>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{% static 'farm/js/m4.js' %}"></script>
+{% if d %}
+<script>
+	$("#a").val("{{ d.PS_PLAN_CODE }}");
+	$("#b").val("{{ d.FI_ID.id }}");
+	$("#c").val("{{ d.GI_ID.id }}");
+	$("#eid").val("{{ d.id }}");
+	$("#btn").html("수정하기");
+</script>
+{% endif %}
+
+{% endblock %}
