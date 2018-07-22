@@ -303,11 +303,78 @@ class seedling_date(models.Model):
 	def __str__(self):
 		return "seedling_date#%s" % self.id
 
+class nutrient_state(models.Model):
+	GB_INNER_FA_ID=models.ForeignKey(gb_info)
+	GE_SUPPLY_START_TIME=models.TimeField(auto_now=False)
+	GE_SUPPLY_END_TIME=models.TimeField(auto_now=False)
+	GE_WATER_OUT=models.FloatField(null=False)
+	GE_SUPPLY_EC=models.FloatField(null=False)
+	GE_SUPPLY_PH=models.FloatField(null=False)
+	GE_SPLY_CONST_CONCEN=models.FloatField(null=False)
+	GE_FLOW_OUT=models.FloatField(null=False)
+	GE_DRAIN_EC=models.FloatField(null=False)
+	GE_DRAIN_PH=models.FloatField(null=False)
+	GE_DRAIN_CONST_CONCEN=models.FloatField(null=False)
 
+	def __str__(self):
+		return "nutrient_state#%s" % self.id
 
+class onoff_act(models.Model):
+	GB_INNER_FA_ID=models.ForeignKey(gb_info)
+	GB_EVENT_TIME=models.TimeField(auto_now=False)
+	GE_FAN=models.NullBooleanField()
+	GE_SUPPORT_LIGHT=models.NullBooleanField()
+	GE_HEAT=models.NullBooleanField()
+	GE_IRRIGA=models.NullBooleanField()
+	GE_CO2_GE=models.NullBooleanField()
+	GE_FOG=models.NullBooleanField()
 
+	def __str__(self):
+		return "onoff_act#%s" % self.id
 
+class actuator(models.Model):
+	GB_INNER_FA_ID=models.ForeignKey(gb_info)
+	GE_ACTION_TIME=models.TimeField(auto_now=False)
+	GE_TOP_VENT=models.NullBooleanField()
+	GE_SIDE_VENT=models.NullBooleanField()
+	GE_HORIZN_CURTAN=models.NullBooleanField()
+	GE_VERTICAL_CURTAN=models.NullBooleanField()
 
+	def __str__(self):
+		return "actuator#%s" % self.id
 
+class env_root(models.Model):
+	GB_INNER_FA_ID=models.ForeignKey(gb_info)
+	GE_ROOT_TIME=models.TimeField(auto_now=False)
+	GE_GROUND_TEMP=models.FloatField(null=False)
+	GE_GROUND_HUMI=models.FloatField(null=False)
+	GE_EC=models.FloatField(null=False)
+	GE_PH=models.FloatField(null=False)
 
+	def __str__(self):
+		return "env_root#%s" % self.id
 
+class env_outer(models.Model):
+	GB_INNER_FA_ID=models.ForeignKey(gb_info)
+	GB_OUT_TIME=models.TimeField(auto_now=False)
+	GE_OUT_TEMP=models.FloatField(null=False)
+	GE_OUT_HUMI=models.FloatField(null=False)
+	GE_OUT_WIND_DIRECT=models.FloatField(null=False)
+	GE_OUT_WIND_SPD=models.FloatField(null=False)
+	GE_SOLAR_RADI=models.FloatField(null=False)
+	GE_RAINF=models.FloatField(null=False)
+
+	def __str__(self):
+		return "env_outer#%s" % self.id
+
+class env_inner(models.Model):
+	GB_INNER_FA_ID=models.ForeignKey(gb_info)
+	GE_IN_TIME=models.TimeField(auto_now=False)
+	GE_IN_TEMP=models.FloatField(null=False)
+	GE_IN_HUMI=models.FloatField(null=False)
+	GE_IN_CO2=models.FloatField(null=False)
+	GE_IN_SOLAR_RADI=models.FloatField(null=False)
+	GE_IN_WIND_SPD=models.FloatField(null=False)
+
+	def __str__(self):
+		return "env_inner#%s" % self.id

@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'^elist$',views.elist,name='elist'),
 	url(r'^clist$',views.clist,name='clist'),
 	url(r'^plist$',views.plist,name='plist'),
+	url(r'^glist$',views.glist,name='glist'),
 
 	url(r'^e1$',views.e1,name='e1'),	
 	url(r'^e1/update$',views.e1update,name='e1update'),	
@@ -97,5 +98,9 @@ urlpatterns = [
 	url(r'^ni$',views.ni,name='ni'),	
 	url(r'^ni/update$',views.ni_update,name='ni_update'),	
 	url(r'^ni/delete/(\d+)/$',views.ni_delete,name='ni_delete'),	
+
+	url(r'^g1$',views.g1,name='g1'),	
+	url(r'^g1/update$',views.g1_update,name='g1_update'),	
+	url(r'^g1/delete/(\d+)/$',views.g1_delete,name='g1_delete'),	
 ]
 

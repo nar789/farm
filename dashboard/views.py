@@ -5,7 +5,8 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
-from .models import e1model,com_infor,device_code,device_admin,gb_info,inner_gh_info,sensor_info,work_info,mainte_info,harves_info,after_harves_info,sale_info,plan_stages,seedling_plan,storage,germination,grafting,crop_info,image_info,dip_info,nursery_info,seedling_date
+from .models import *
+
 # Create your views here.
 
 def index(request):
@@ -48,6 +49,9 @@ def clist(request):
 
 def plist(request):
 	return render(request,"farm/plist.html",{})
+
+def glist(request):
+	return render(request,"farm/glist.html",{})
 
 def e1(request):
 	ds=e1model.objects.all()
@@ -1065,3 +1069,61 @@ def ni_delete(request,eid):
 	getd=nursery_info.objects.get(id=eid)
 	getd.delete()
 	return redirect('ni')
+
+
+
+def g1(request):
+	ds=nutrient_state.objects.all()
+	return render(request,"farm/g1.html",{"ds":ds})
+
+
+def g1_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=gb_info.objects.get(id=a)
+		b=request.POST['b']
+		c=request.POST['c']
+		d=float(request.POST['d'])
+		e=float(request.POST['e'])
+		f=float(request.POST['f'])
+		g=float(request.POST['g'])
+		h=float(request.POST['h'])
+		i=float(request.POST['i'])
+		j=float(request.POST['j'])
+		k=float(request.POST['k'])
+		
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=nutrient_state.objects.get(id=eid)
+			getd.GB_INNER_FA_ID=a
+			getd.GE_SUPPLY_START_TIME=b
+			getd.GE_SUPPLY_END_TIME=c
+			getd.GE_WATER_OUT=d
+			getd.GE_SUPPLY_EC=e
+			getd.GE_SUPPLY_PH=f
+			getd.GE_SPLY_CONST_CONCEN=g
+			getd.GE_FLOW_OUT=h
+			getd.GE_DRAIN_EC=i
+			getd.GE_DRAIN_PH=j
+			getd.GE_DRAIN_CONST_CONCEN=k
+			getd.save()
+		else:
+			data=nutrient_state(GB_INNER_FA_ID=a,GE_SUPPLY_START_TIME=b,GE_SUPPLY_END_TIME=c,GE_WATER_OUT=d,GE_SUPPLY_EC=e,
+				GE_SUPPLY_PH=f,GE_SPLY_CONST_CONCEN=g,GE_FLOW_OUT=h,GE_DRAIN_EC=i,GE_DRAIN_PH=j,GE_DRAIN_CONST_CONCEN=k)
+			data.save()
+
+		return redirect('g1')
+	if 'id' in request.GET:
+		data=get_object_or_404(nutrient_state,id=request.GET['id'])
+		ds1=gb_info.objects.all()
+		return render(request,"farm/g1_update.html",{'d':data,'ds1':ds1})
+
+	ds1=gb_info.objects.all()
+	return render(request,"farm/g1_update.html",{'ds1':ds1})
+
+def g1_delete(request,eid):
+	getd=nutrient_state.objects.get(id=eid)
+	getd.delete()
+	return redirect('g1')
