@@ -102,5 +102,25 @@ urlpatterns = [
 	url(r'^g1$',views.g1,name='g1'),	
 	url(r'^g1/update$',views.g1_update,name='g1_update'),	
 	url(r'^g1/delete/(\d+)/$',views.g1_delete,name='g1_delete'),	
+
+	url(r'^g2$',views.g2,name='g2'),	
+	url(r'^g2/update$',views.g2_update,name='g2_update'),	
+	url(r'^g2/delete/(\d+)/$',views.g2_delete,name='g2_delete'),	
+
+	url(r'^g3$',views.g3,name='g3'),	
+	url(r'^g3/update$',views.g3_update,name='g3_update'),	
+	url(r'^g3/delete/(\d+)/$',views.g3_delete,name='g3_delete'),	
+
+	url(r'^g4$',views.g4,name='g4'),	
+	url(r'^g4/update$',views.g4_update,name='g4_update'),	
+	url(r'^g4/delete/(\d+)/$',views.g4_delete,name='g4_delete'),	
+
+	url(r'^g5$',views.g5,name='g5'),	
+	url(r'^g5/update$',views.g5_update,name='g5_update'),	
+	url(r'^g5/delete/(\d+)/$',views.g5_delete,name='g5_delete'),	
+
+	url(r'^g6$',views.g6,name='g6'),	
+	url(r'^g6/update$',views.g6_update,name='g6_update'),	
+	url(r'^g6/delete/(\d+)/$',views.g6_delete,name='g6_delete'),	
 ]
 

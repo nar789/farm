@@ -10,7 +10,7 @@ from .models import *
 # Create your views here.
 
 def index(request):
-	return render(request,"farm/index.html",{'user':request.user})
+	return render(request,"farm/index3.html",{'user':request.user})
 
 
 def join(request):
@@ -1127,3 +1127,238 @@ def g1_delete(request,eid):
 	getd=nutrient_state.objects.get(id=eid)
 	getd.delete()
 	return redirect('g1')
+
+def g2(request):
+	ds=onoff_act.objects.all()
+	return render(request,"farm/g2.html",{"ds":ds})
+
+
+def g2_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=gb_info.objects.get(id=a)
+		b=request.POST['b']
+		c=bool(int(request.POST['c']))
+		d=bool(int(request.POST['d']))
+		e=bool(int(request.POST['e']))
+		f=bool(int(request.POST['f']))
+		g=bool(int(request.POST['g']))
+		h=bool(int(request.POST['h']))
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=onoff_act.objects.get(id=eid)
+			getd.GB_INNER_FA_ID=a
+			getd.GB_EVENT_TIME=b
+			getd.GE_FAN=c
+			getd.GE_SUPPORT_LIGHT=d
+			getd.GE_HEAT=e
+			getd.GE_IRRIGA=f
+			getd.GE_CO2_GE=g
+			getd.GE_FOG=h
+			getd.save()
+		else:
+			data=onoff_act(GB_INNER_FA_ID=a,GB_EVENT_TIME=b,GE_FAN=c,GE_SUPPORT_LIGHT=d,GE_HEAT=e,
+				GE_IRRIGA=f,GE_CO2_GE=g,GE_FOG=h)
+			data.save()
+
+		return redirect('g2')
+	if 'id' in request.GET:
+		data=get_object_or_404(onoff_act,id=request.GET['id'])
+		ds1=gb_info.objects.all()
+		return render(request,"farm/g2_update.html",{'d':data,'ds1':ds1})
+
+	ds1=gb_info.objects.all()
+	return render(request,"farm/g2_update.html",{'ds1':ds1})
+
+def g2_delete(request,eid):
+	getd=onoff_act.objects.get(id=eid)
+	getd.delete()
+	return redirect('g2')
+
+def g3(request):
+	ds=actuator.objects.all()
+	return render(request,"farm/g3.html",{"ds":ds})
+
+
+def g3_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=gb_info.objects.get(id=a)
+		b=request.POST['b']
+		c=bool(int(request.POST['c']))
+		d=bool(int(request.POST['d']))
+		e=bool(int(request.POST['e']))
+		f=bool(int(request.POST['f']))
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=actuator.objects.get(id=eid)
+			getd.GB_INNER_FA_ID=a
+			getd.GE_ACTION_TIME=b
+			getd.GE_TOP_VENT=c
+			getd.GE_SIDE_VENT=d
+			getd.GE_HORIZN_CURTAN=e
+			getd.GE_VERTICAL_CURTAN=f
+			getd.save()
+		else:
+			data=actuator(GB_INNER_FA_ID=a,GE_ACTION_TIME=b,GE_TOP_VENT=c,GE_SIDE_VENT=d,GE_HORIZN_CURTAN=e,
+				GE_VERTICAL_CURTAN=f)
+			data.save()
+
+		return redirect('g3')
+	if 'id' in request.GET:
+		data=get_object_or_404(actuator,id=request.GET['id'])
+		ds1=gb_info.objects.all()
+		return render(request,"farm/g3_update.html",{'d':data,'ds1':ds1})
+
+	ds1=gb_info.objects.all()
+	return render(request,"farm/g3_update.html",{'ds1':ds1})
+
+def g3_delete(request,eid):
+	getd=actuator.objects.get(id=eid)
+	getd.delete()
+	return redirect('g3')
+
+def g4(request):
+	ds=env_root.objects.all()
+	return render(request,"farm/g4.html",{"ds":ds})
+
+
+def g4_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=gb_info.objects.get(id=a)
+		b=request.POST['b']
+		c=float(request.POST['c'])
+		d=float(request.POST['d'])
+		e=float(request.POST['e'])
+		f=float(request.POST['f'])
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=env_root.objects.get(id=eid)
+			getd.GB_INNER_FA_ID=a
+			getd.GE_ROOT_TIME=b
+			getd.GE_GROUND_TEMP=c
+			getd.GE_GROUND_HUMI=d
+			getd.GE_EC=e
+			getd.GE_PH=f
+			getd.save()
+		else:
+			data=env_root(GB_INNER_FA_ID=a,GE_ROOT_TIME=b,GE_GROUND_TEMP=c,GE_GROUND_HUMI=d,GE_EC=e,
+				GE_PH=f)
+			data.save()
+
+		return redirect('g4')
+	if 'id' in request.GET:
+		data=get_object_or_404(env_root,id=request.GET['id'])
+		ds1=gb_info.objects.all()
+		return render(request,"farm/g4_update.html",{'d':data,'ds1':ds1})
+
+	ds1=gb_info.objects.all()
+	return render(request,"farm/g4_update.html",{'ds1':ds1})
+
+def g4_delete(request,eid):
+	getd=env_root.objects.get(id=eid)
+	getd.delete()
+	return redirect('g4')
+
+def g5(request):
+	ds=env_outer.objects.all()
+	return render(request,"farm/g5.html",{"ds":ds})
+
+
+def g5_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=gb_info.objects.get(id=a)
+		b=request.POST['b']
+		c=float(request.POST['c'])
+		d=float(request.POST['d'])
+		e=float(request.POST['e'])
+		f=float(request.POST['f'])
+		g=float(request.POST['g'])
+		h=float(request.POST['h'])
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=env_outer.objects.get(id=eid)
+			getd.GB_INNER_FA_ID=a
+			getd.GB_OUT_TIME=b
+			getd.GE_OUT_TEMP=c
+			getd.GE_OUT_HUMI=d
+			getd.GE_OUT_WIND_DIRECT=e
+			getd.GE_OUT_WIND_SPD=f
+			getd.GE_SOLAR_RADI=g
+			getd.GE_RAINF=h
+			getd.save()
+		else:
+			data=env_outer(GB_INNER_FA_ID=a,GB_OUT_TIME=b,GE_OUT_TEMP=c,GE_OUT_HUMI=d,GE_OUT_WIND_DIRECT=e,
+				GE_OUT_WIND_SPD=f,GE_SOLAR_RADI=g,GE_RAINF=h)
+			data.save()
+
+		return redirect('g5')
+	if 'id' in request.GET:
+		data=get_object_or_404(env_outer,id=request.GET['id'])
+		ds1=gb_info.objects.all()
+		return render(request,"farm/g5_update.html",{'d':data,'ds1':ds1})
+
+	ds1=gb_info.objects.all()
+	return render(request,"farm/g5_update.html",{'ds1':ds1})
+
+def g5_delete(request,eid):
+	getd=env_outer.objects.get(id=eid)
+	getd.delete()
+	return redirect('g5')
+
+def g6(request):
+	ds=env_inner.objects.all()
+	return render(request,"farm/g6.html",{"ds":ds})
+
+
+def g6_update(request):
+	if request.method=="POST":
+		a=int(request.POST['a'])
+		a=gb_info.objects.get(id=a)
+		b=request.POST['b']
+		c=float(request.POST['c'])
+		d=float(request.POST['d'])
+		e=float(request.POST['e'])
+		f=float(request.POST['f'])
+		g=float(request.POST['g'])
+		
+		eid=int(request.POST['eid'])
+
+		if eid!=0:
+			getd=env_inner.objects.get(id=eid)
+			getd.GB_INNER_FA_ID=a
+			getd.GE_IN_TIME=b
+			getd.GE_IN_TEMP=c
+			getd.GE_IN_HUMI=d
+			getd.GE_IN_CO2=e
+			getd.GE_IN_SOLAR_RADI=f
+			getd.GE_IN_WIND_SPD=g
+			getd.save()
+		else:
+			data=env_inner(GB_INNER_FA_ID=a,GE_IN_TIME=b,GE_IN_TEMP=c,GE_IN_HUMI=d,GE_IN_CO2=e,
+				GE_IN_SOLAR_RADI=f,GE_IN_WIND_SPD=g)
+			data.save()
+
+		return redirect('g6')
+	if 'id' in request.GET:
+		data=get_object_or_404(env_inner,id=request.GET['id'])
+		ds1=gb_info.objects.all()
+		return render(request,"farm/g6_update.html",{'d':data,'ds1':ds1})
+
+	ds1=gb_info.objects.all()
+	return render(request,"farm/g6_update.html",{'ds1':ds1})
+
+def g6_delete(request,eid):
+	getd=env_inner.objects.get(id=eid)
+	getd.delete()
+	return redirect('g6')
