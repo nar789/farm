@@ -2,6 +2,10 @@
 	width: 100%;
 	margin-top:30px;
 }
+.optional{
+	float:right;
+	margin-bottom: 10px;
+}
 .btn-success{
 	float:right;
 	margin-bottom: 10px;

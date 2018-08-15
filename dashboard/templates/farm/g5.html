@@ -6,9 +6,12 @@
 
 
 	<div class=tg>
-		<h3><a href="{% url 'glist' %}"><i class="fas fa-arrow-left"></i></a> 외부기상환경</h3>		
+		<h3><a href="{% url 'glist' %}"><i class="mdi mdi-arrow-left"></i></a> 외부기상환경</h3>		
 		<hr>
-		<a href="{% url 'g5_update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 추가</button></a>
+		<a href="{% static 'farm/files/env_outer.xlsx' %}" download><button class="optional btn btn-primary mr-1"><i class="mdi mdi-download"></i> 엑셀파일로 다운로드</button></a>
+		<input type=file name="xls" id="xls" style="display:none;">
+		<a href="javascript:document.getElementById('xls').click();"><button class="optional btn btn-primary mr-1"><i class="mdi mdi-upload"></i> 엑셀파일로 업로드</button></a>
+		<a href="{% url 'g5_update' %}"><button class="optional btn btn-success mr-1"><i class="mdi mdi-plus"></i> 추가</button></a>
 		<table class="table table-hover">
 		  <thead>
 		    <tr>
