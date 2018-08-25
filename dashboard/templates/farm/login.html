@@ -5,7 +5,7 @@
 	<link href="{% static 'farm/css/login.css' %}" rel="stylesheet">
       <form class="form-signin" method="POST">
       	{% csrf_token %}
-        <h3 class="form-signin-heading">로그인</h3>
+        <h4 class="form-signin-heading mt-4">로그인</h4>
         <hr>
         <input name=username type="text" class="form-control" placeholder="아이디" required autofocus>
         <br>
@@ -17,8 +17,8 @@
           </label>
           <br>
         </div>
-        <button class="btn btn-info btn-block" type="submit">로그인</button>
+        <button class="btn btn-primary btn-block" type="submit">로그인</button>
         <br>
-        <center><a href="'{% url 'join' %}'">회원가입</a></center>
+        <center><a href="{% url 'join' %}">회원가입</a></center>
       </form>
 {% endblock %}

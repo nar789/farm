@@ -7,7 +7,12 @@
 
 <form class="form-horizontal" method="post">
 	{% csrf_token %}
-	<h2 class="form-signin-heading"><a href="{% url 'e1' %}"><i class="fas fa-arrow-left"></i></a> 농업경영정보</h2>
+	<div id="title_join">
+		<h2 class="form-signin-heading text-primary">회원가입</h2>
+	</div>
+	<div id="title_update" style="display: none;">
+		<h2 class="form-signin-heading"><a href="{% url 'e1' %}"><i class="fas fa-arrow-left"></i></a> 농업경영정보</h2>
+	</div>
 	<hr>
 	<div class="form-group">
 		<label for="email" class="cols-sm-2 control-label">농가경영체ID</label>
@@ -101,14 +106,26 @@
 
 	<br>
 	<input type=hidden id=eid value="0" name=eid>
-	<div class="form-group" id=signup-group>
-		<button type="submit" class="btn btn-info btn-block login-button" id="btn">추가하기</button>
-	</div>
-	<center>
-	<div class="login-register">
-        <a href="{% url 'e1' %}">목록으로</a>
-     </div>
- 	</center>
+	<div id="bottom_join">
+		<div class="form-group" id=signup-group>
+			<button type="submit" class="btn btn-primary btn-block login-button" id="btn">회원가입</button>
+		</div>
+		<center>
+		<div class="login-register">
+	        <a href="{% url 'login' %}">로그인</a>
+	     </div>
+	 	</center>
+	 </div>
+	 <div id="bottom_update" style="display: none;">
+		<div class="form-group" id=signup-group>
+			<button type="submit" class="btn btn-primary btn-block login-button" id="btn">수정하기</button>
+		</div>
+		<center>
+		<div class="login-register">
+	        <a href="{% url 'e1' %}">목록으로</a>
+	     </div>
+	 	</center>
+	 </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="{% static 'farm/js/m2.js' %}"></script>
@@ -126,6 +143,10 @@
 	$("#j").val("{{ d.GB_COOPER_UNIT }}");
 	$("#eid").val("{{ d.id }}");
 	$("#btn").html("수정하기");
+	$("#title_join").attr("style","display:none;");
+	$("#title_update").attr("style","display:block;");
+	$("#bottom_join").attr("style","display:none;");
+	$("#bottom_update").attr("style","display:block;");
 </script>
 {% endif %}
 

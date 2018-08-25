@@ -3,8 +3,8 @@
 {% load staticfiles %}
 	<link href="{% static 'farm/css/complete.css' %}" rel="stylesheet">
 	<div>
-		<h3>{{ msg }}</h3>
-		<center><a href="{% url 'index' %}"><button class="btn btn-info">처음으로</button></a></center>
+		<h2 class="mt-4 mb-4 text-primary text-center">{{ msg }}</h2>
+		<center><a href="{% url 'index' %}"><button class="btn btn-primary">뒤로가기</button></a></center>
 	</div>
 {% endblock %}
 
