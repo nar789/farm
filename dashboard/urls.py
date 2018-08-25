@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
 	url(r'^$',views.index,name='index'),
-	url(r'^join$',views.join,name='join'),
+	url(r'^join$',views.e1update,name='join'),
 	url(r'^login$',views.loginv,name='login'),
 	url(r'^logout$',views.logoutv,name='logout'),
 	url(r'^elist$',views.elist,name='elist'),

@@ -54,7 +54,11 @@ def glist(request):
 	return render(request,"farm/glist.html",{})
 
 def e1(request):
-	ds=e1model.objects.all()
+	
+	if request.user.username == "admin":
+		ds=e1model.objects.all()
+	else:
+		ds=e1model.objects.filter(GB_FA_ID=request.user.username)
 	return render(request,"farm/e1.html",{"ds":ds})
 
 def e1update(request):
@@ -84,10 +88,16 @@ def e1update(request):
 			getd.GB_FAM_NUM=i
 			getd.GB_COOPER_UNIT=j
 			getd.save()
+			return redirect('e1')
 		else:
 			data=e1model(GB_FA_ID=a,GB_FA_PW=b,CTVT_FCLTY_ID=c,GB_FA_PHONE=d,GB_FA_EMAIL=e,GB_FA_ADDR=f,GB_FA_NAME=g,GB_FA_SIZE=h,GB_FAM_NUM=i,GB_COOPER_UNIT=j)
 			data.save()
-		return redirect('e1')
+			username=request.POST['a']
+			email=request.POST['e']
+			password=request.POST['b']
+			u=User.objects.create_user(username=username,password=password,email=email)
+			login(request,u)
+			return render(request,"farm/complete.html",{'msg':'회원가입이 완료되었습니다.','user':request.user})
 	if 'id' in request.GET:
 		data=get_object_or_404(e1model,id=request.GET['id'])
 		return render(request,"farm/e1update.html",{'d':data})
@@ -95,8 +105,11 @@ def e1update(request):
 
 def e1delete(request,eid):
 	getd=e1model.objects.get(id=eid)
+	u=User.objects.get(username=getd.GB_FA_ID)
+	u.delete()
 	getd.delete()
-	return redirect('e1')
+	logout(request)
+	return redirect('index')
 
 
 def ci_update(request):
