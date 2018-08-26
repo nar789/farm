@@ -214,9 +214,13 @@ def da_update(request):
 	if 'id' in request.GET:
 		data=get_object_or_404(device_admin,id=request.GET['id'])
 		ds=com_infor.objects.all()
+		if len(ds)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 		return render(request,"farm/da_update.html",{'d':data,'ds':ds})
 
 	ds=com_infor.objects.all()
+	if len(ds)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 	return render(request,"farm/da_update.html",{'ds':ds})
 
 
@@ -401,10 +405,14 @@ def si_update(request):
 		data=get_object_or_404(sensor_info,id=request.GET['id'])
 		ds1=device_code.objects.all()
 		ds2=com_infor.objects.all()
+		if len(ds1)==0 or len(ds2)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 		return render(request,"farm/si_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
 
 	ds1=device_code.objects.all()
 	ds2=com_infor.objects.all()
+	if len(ds1)==0 or len(ds2)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 	return render(request,"farm/si_update.html",{'ds1':ds1,'ds2':ds2})
 
 
@@ -656,33 +664,23 @@ def ps(request):
 def ps_update(request):
 	if request.method=="POST":
 		a=request.POST['a']
-		b=int(request.POST['b'])
-		b=e1model.objects.get(id=b)
-		c=int(request.POST['c'])
-		c=gb_info.objects.get(id=c)
 		
 		eid=int(request.POST['eid'])
 
 		if eid!=0:
 			getd=plan_stages.objects.get(id=eid)
 			getd.PS_PLAN_CODE=a
-			getd.FI_ID=b
-			getd.GI_ID=c
 			getd.save()
 		else:
-			data=plan_stages(PS_PLAN_CODE=a,FI_ID=b,GI_ID=c)
+			data=plan_stages(PS_PLAN_CODE=a)
 			data.save()
 
 		return redirect('ps')
 	if 'id' in request.GET:
 		data=get_object_or_404(plan_stages,id=request.GET['id'])
-		ds1=e1model.objects.all()
-		ds2=gb_info.objects.all()
-		return render(request,"farm/ps_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
+		return render(request,"farm/ps_update.html",{'d':data})
 
-	ds1=e1model.objects.all()
-	ds2=gb_info.objects.all()
-	return render(request,"farm/ps_update.html",{'ds1':ds1,'ds2':ds2})
+	return render(request,"farm/ps_update.html",{})
 
 def ps_delete(request,eid):
 	getd=plan_stages.objects.get(id=eid)
@@ -691,7 +689,7 @@ def ps_delete(request,eid):
 
 
 def sp(request):
-	ds=seedling_plan.objects.all()
+	ds=seedling_plan.objects.filter(CI_INFO_ID__GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
 	return render(request,"farm/sp.html",{"ds":ds})
 
 
@@ -711,6 +709,9 @@ def sp_update(request):
 
 		l=int(request.POST['l'])
 		l=plan_stages.objects.get(id=l)
+
+		m=int(request.POST['m'])
+		m=crop_info.objects.get(id=m)
 		
 		eid=int(request.POST['eid'])
 
@@ -728,19 +729,27 @@ def sp_update(request):
 			getd.SP_GRAFT_TAKE=j
 			getd.SP_SHIPPING_DATE=k
 			getd.PS_ID=l
+			getd.CI_INFO_ID=m
 			getd.save()
 		else:
-			data=seedling_plan(SP_ID=a,SP_DATE=b,SP_TRAY=c,SP_GROW_MEDIA=d,SP_PRODUCTION=e,SP_SEEDING_DATE=f,SP_GRAFTING_DATE=g,SP_SCION_GRAFT=h,SP_ROOT_GRAFT=i,SP_GRAFT_TAKE=j,SP_SHIPPING_DATE=k,PS_ID=l)
+			data=seedling_plan(SP_ID=a,SP_DATE=b,SP_TRAY=c,SP_GROW_MEDIA=d,SP_PRODUCTION=e,SP_SEEDING_DATE=f,SP_GRAFTING_DATE=g,
+				SP_SCION_GRAFT=h,SP_ROOT_GRAFT=i,SP_GRAFT_TAKE=j,SP_SHIPPING_DATE=k,PS_ID=l,CI_INFO_ID=m)
 			data.save()
 
 		return redirect('sp')
 	if 'id' in request.GET:
 		data=get_object_or_404(seedling_plan,id=request.GET['id'])
 		ds1=plan_stages.objects.all()
-		return render(request,"farm/sp_update.html",{'d':data,'ds1':ds1})
+		ds2=crop_info.objects.filter(GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
+		if len(ds1)==0 or len(ds2)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
+		return render(request,"farm/sp_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
 
 	ds1=plan_stages.objects.all()
-	return render(request,"farm/sp_update.html",{'ds1':ds1})
+	ds2=crop_info.objects.filter(GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
+	if len(ds1)==0 or len(ds2)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
+	return render(request,"farm/sp_update.html",{'ds1':ds1,'ds2':ds2})
 
 def sp_delete(request,eid):
 	getd=seedling_plan.objects.get(id=eid)
@@ -886,7 +895,7 @@ def gr_delete(request,eid):
 
 
 def cr(request):
-	ds=crop_info.objects.all()
+	ds=crop_info.objects.filter(GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
 	return render(request,"farm/cr.html",{"ds":ds})
 
 
@@ -898,6 +907,8 @@ def cr_update(request):
 		d=request.POST['d']
 		e=request.POST['e']
 		f=request.POST['f']
+		g=int(request.POST['g'])
+		g=inner_gh_info.objects.get(id=g)
 		
 		eid=int(request.POST['eid'])
 
@@ -909,17 +920,24 @@ def cr_update(request):
 			getd.CI_SCION_VAR=d
 			getd.CI_INFO_GATHER=e
 			getd.CI_GATHER_CODE=f
+			getd.GB_INNER_FA_ID=g
 			getd.save()
 		else:
-			data=crop_info(CI_INFO_ID=a,CI_VEGETABLES=b,CI_NG_SEEDING_VAR=c,CI_SCION_VAR=d,CI_INFO_GATHER=e,CI_GATHER_CODE=f)
+			data=crop_info(CI_INFO_ID=a,CI_VEGETABLES=b,CI_NG_SEEDING_VAR=c,CI_SCION_VAR=d,CI_INFO_GATHER=e,CI_GATHER_CODE=f,GB_INNER_FA_ID=g)
 			data.save()
 
 		return redirect('cr')
 	if 'id' in request.GET:
 		data=get_object_or_404(crop_info,id=request.GET['id'])
-		return render(request,"farm/cr_update.html",{'d':data})
+		ds=inner_gh_info.objects.filter(GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
+		if len(ds)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
+		return render(request,"farm/cr_update.html",{'d':data,'ds':ds})
 
-	return render(request,"farm/cr_update.html",{})
+	ds=inner_gh_info.objects.filter(GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
+	if len(ds)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
+	return render(request,"farm/cr_update.html",{'ds':ds})
 
 def cr_delete(request,eid):
 	getd=crop_info.objects.get(id=eid)
@@ -1066,19 +1084,56 @@ def sd_delete(request,eid):
 
 
 def ni(request):
-	ds=nursery_info.objects.all()
+	ds=nursery_info.objects.filter(CI_ID__GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
 	return render(request,"farm/ni.html",{"ds":ds})
 
 
 def ni_update(request):
 	if request.method=="POST":
 		a=request.POST['a']
-		b=request.POST['b']
-		c=request.POST['c']
-		d=request.POST['d']
-
+		b=float(request.POST['b'])
+		c=float(request.POST['c'])
+		d=float(request.POST['d'])
 		e=int(request.POST['e'])
 		e=crop_info.objects.get(id=e)
+		f1=float(request.POST['f1'])
+		f2=float(request.POST['f2'])
+		f3=float(request.POST['f3'])
+		f4=float(request.POST['f4'])
+		f5=float(request.POST['f5'])
+		f6=int(request.POST['f6'])
+		f7=int(request.POST['f7'])
+		f8=float(request.POST['f8'])
+		f9=float(request.POST['f9'])
+		f10=float(request.POST['f10'])
+		f11=float(request.POST['f11'])
+		f12=float(request.POST['f12'])
+		f13=float(request.POST['f13'])
+		f14=float(request.POST['f14'])
+		f15=float(request.POST['f15'])
+		f16=float(request.POST['f16'])
+		f17=float(request.POST['f17'])
+		f18=float(request.POST['f18'])
+		f19=float(request.POST['f19'])
+		f20=float(request.POST['f20'])
+		f21=float(request.POST['f21'])
+		f22=float(request.POST['f22'])
+		f23=float(request.POST['f23'])
+		f24=float(request.POST['f24'])
+		f25=float(request.POST['f25'])
+		f26=float(request.POST['f26'])
+		f27=float(request.POST['f27'])
+		f28=float(request.POST['f28'])
+		f29=float(request.POST['f29'])
+		f30=float(request.POST['f30'])
+		f31=float(request.POST['f31'])
+		f32=float(request.POST['f32'])
+		f33=float(request.POST['f33'])
+		f34=float(request.POST['f34'])
+		f35=float(request.POST['f35'])
+		f36=float(request.POST['f36'])
+		f37=float(request.POST['f37'])
+		f38=float(request.POST['f38'])
 		
 		eid=int(request.POST['eid'])
 
@@ -1088,19 +1143,99 @@ def ni_update(request):
 			getd.NI_PH=b
 			getd.NI_LN=c
 			getd.NI_LL=d
+			getd.NI_LW=f1
+			getd.NI_HL=f2
+			getd.NI_HSD=f3
+			getd.NI_SDGP=f4
+			getd.NI_SDA=f5
+			getd.NI_FBN=f6
+			getd.NI_FFN=f7
+			getd.NI_PFW=f8
+			getd.NI_SFW=f9
+			getd.NI_LFW=f10
+			getd.NI_S_FRESH_W=f11
+			getd.NI_ROOT_FW=f12
+			getd.NI_PDW=f13
+			getd.NI_SDW=f14
+			getd.NI_L_DRY_W=f15
+			getd.NI_S_DRY_W=f16
+			getd.NI_ROOT_DRY_W=f17
+			getd.NI_SRR=f18
+			getd.NI_SC=f19
+			getd.NI_LA=f20
+			getd.NI_LAI=f21
+			getd.NI_LAR=f22
+			getd.NI_SLA=f23
+			getd.NI_LI=f24
+			getd.NI_LIE=f25
+			getd.NI_LIC=f26
+			getd.NI_REC=f27
+			getd.NI_RUE=f28
+			getd.NI_NPR=f29
+			getd.NI_STOMATAL_C=f30
+			getd.NI_TR=f31
+			getd.NI_CGR=f32
+			getd.NI_RGR=f33
+			getd.NI_LEAF_TEMP=f34
+			getd.NI_CC=f35
+			getd.NI_PWC=f36
+			getd.NI_IA=f37
+			getd.NI_APF=f38
 			getd.CI_ID=e
 			getd.save()
 		else:
-			data=nursery_info(NI_SEDDING_ID=a,NI_PH=b,NI_LN=c,NI_LL=d,CI_ID=e)
+			data=nursery_info(NI_SEDDING_ID=a,NI_PH=b,NI_LN=c,NI_LL=d,CI_ID=e
+				,NI_LW=f1
+				,NI_HL=f2
+				,NI_HSD=f3
+				,NI_SDGP=f4
+				,NI_SDA=f5
+				,NI_FBN=f6
+				,NI_FFN=f7
+				,NI_PFW=f8
+				,NI_SFW=f9
+				,NI_LFW=f10
+				,NI_S_FRESH_W=f11
+				,NI_ROOT_FW=f12
+				,NI_PDW=f13
+				,NI_SDW=f14
+				,NI_L_DRY_W=f15
+				,NI_S_DRY_W=f16
+				,NI_ROOT_DRY_W=f17
+				,NI_SRR=f18
+				,NI_SC=f19
+				,NI_LA=f20
+				,NI_LAI=f21
+				,NI_LAR=f22
+				,NI_SLA=f23
+				,NI_LI=f24
+				,NI_LIE=f25
+				,NI_LIC=f26
+				,NI_REC=f27
+				,NI_RUE=f28
+				,NI_NPR=f29
+				,NI_STOMATAL_C=f30
+				,NI_TR=f31
+				,NI_CGR=f32
+				,NI_RGR=f33
+				,NI_LEAF_TEMP=f34
+				,NI_CC=f35
+				,NI_PWC=f36
+				,NI_IA=f37
+				,NI_APF=f38)
 			data.save()
 
 		return redirect('ni')
 	if 'id' in request.GET:
 		data=get_object_or_404(nursery_info,id=request.GET['id'])
-		ds1=crop_info.objects.all()
+		ds1=crop_info.objects.filter(GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
+		if len(ds1)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 		return render(request,"farm/ni_update.html",{'d':data,'ds1':ds1})
 
-	ds1=crop_info.objects.all()
+	ds1=crop_info.objects.filter(GB_INNER_FA_ID__GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
+	if len(ds1)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 	return render(request,"farm/ni_update.html",{'ds1':ds1})
 
 def ni_delete(request,eid):

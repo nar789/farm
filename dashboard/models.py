@@ -151,11 +151,22 @@ class sale_info(models.Model):
 
 class plan_stages(models.Model):
 	PS_PLAN_CODE=models.IntegerField(null=False)
-	FI_ID=models.ForeignKey(e1model)
-	GI_ID=models.ForeignKey(gb_info)
 	
 	def __str__(self):
 		return "plan_stages#%s" % self.id
+
+class crop_info(models.Model):
+	CI_INFO_ID=models.IntegerField(null=False)
+	CI_VEGETABLES=models.CharField(max_length=100)
+	CI_NG_SEEDING_VAR=models.CharField(max_length=100)
+	CI_SCION_VAR=models.CharField(max_length=100)
+	CI_INFO_GATHER=models.IntegerField(null=False)
+	CI_GATHER_CODE=models.IntegerField(null=False)
+	GB_INNER_FA_ID=models.ForeignKey(inner_gh_info)
+
+	def __str__(self):
+		return "crop_info#%s" % self.id
+
 
 class seedling_plan(models.Model):
 	SP_ID=models.IntegerField(null=False)
@@ -170,6 +181,7 @@ class seedling_plan(models.Model):
 	SP_GRAFT_TAKE=models.IntegerField(null=False)
 	SP_SHIPPING_DATE=models.DateField(auto_now=False)
 	PS_ID=models.ForeignKey(plan_stages)
+	CI_INFO_ID=models.ForeignKey(crop_info)
 
 	def __str__(self):
 		return "seedling_plan#%s" % self.id
@@ -208,16 +220,6 @@ class grafting(models.Model):
 		return "grafting#%s" % self.id
 
 
-class crop_info(models.Model):
-	CI_INFO_ID=models.IntegerField(null=False)
-	CI_VEGETABLES=models.CharField(max_length=100)
-	CI_NG_SEEDING_VAR=models.CharField(max_length=100)
-	CI_SCION_VAR=models.CharField(max_length=100)
-	CI_INFO_GATHER=models.IntegerField(null=False)
-	CI_GATHER_CODE=models.IntegerField(null=False)
-
-	def __str__(self):
-		return "crop_info#%s" % self.id
 
 class image_info(models.Model):
 	IMI_ID=models.IntegerField(null=False)
@@ -247,7 +249,6 @@ class nursery_info(models.Model):
 	NI_PH=models.FloatField(null=False)
 	NI_LN=models.FloatField(null=False)
 	NI_LL=models.FloatField(null=False)
-	"""
 	NI_LW=models.FloatField(null=False)
 	NI_HL=models.FloatField(null=False)
 	NI_HSD=models.FloatField(null=False)
@@ -286,7 +287,6 @@ class nursery_info(models.Model):
 	NI_PWC=models.FloatField(null=False)
 	NI_IA=models.FloatField(null=False)
 	NI_APF=models.FloatField(null=False)
-	"""
 	CI_ID=models.ForeignKey(crop_info)
 
 	def __str__(self):

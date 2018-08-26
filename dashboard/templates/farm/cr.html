@@ -8,8 +8,11 @@
 	<div class=tg>
 		<h3><a href="{% url 'plist' %}"><i class="fas fa-arrow-left"></i></a> 작물정보</h3>		
 		<hr>
+		<a href="{% static 'farm/files/env_outer.xlsx' %}" download><button class="optional btn btn-primary mr-1"><i class="mdi mdi-download"></i> 엑셀파일로 다운로드</button></a>
+		<input type=file name="xls" id="xls" style="display:none;">
+		<a href="javascript:document.getElementById('xls').click();"><button class="optional btn btn-primary mr-1 ml-1"><i class="mdi mdi-upload"></i> 엑셀파일로 업로드</button></a>
 		<a href="{% url 'cr_update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 추가</button></a>
-		<table class="table table-hover">
+		<table class="table table-hover table-responsive">
 		  <thead>
 		    <tr>
 		      <th scope="col">ID</th>
@@ -19,6 +22,7 @@
 		      <th scope="col">접수 품종명</th>
 		      <th scope="col">정보 수집일</th>
 		      <th scope="col">수집방법코드</th>
+		      <th scope="col">내부시설ID</th>
 		      <th scope="col">수정</th>	
 		      <th scope="col">삭제</th>	
 		    </tr>
@@ -35,8 +39,7 @@
 				<td>{{i.CI_SCION_VAR}}</td>
 				<td>{{i.CI_INFO_GATHER}}</td>
 				<td>{{i.CI_GATHER_CODE}}</td>
-		
-
+				<td>{{i.GB_INNER_FA_ID.GB_DONG_NUMBER}}</td>
 				<td><a href="{% url 'cr_update' %}?id={{i.id}}"><button class="btn btn-info">수정</button></a></td>
 				<td><button class="btn btn-danger" data-toggle="modal" data-target="#delmodal{{i.id}}">삭제</button></td>
 

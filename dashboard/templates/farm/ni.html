@@ -8,8 +8,11 @@
 	<div class=tg>
 		<h3><a href="{% url 'plist' %}"><i class="fas fa-arrow-left"></i></a> 모종생산</h3>		
 		<hr>
+		<a href="{% static 'farm/files/env_outer.xlsx' %}" download><button class="optional btn btn-primary mr-1"><i class="mdi mdi-download"></i> 엑셀파일로 다운로드</button></a>
+		<input type=file name="xls" id="xls" style="display:none;">
+		<a href="javascript:document.getElementById('xls').click();"><button class="optional btn btn-primary mr-1 ml-1"><i class="mdi mdi-upload"></i> 엑셀파일로 업로드</button></a>
 		<a href="{% url 'ni_update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 추가</button></a>
-		<table class="table table-hover">
+		<table class="table table-hover table-responsive">
 		  <thead>
 		    <tr>
 		      <th scope="col">ID</th>
@@ -17,6 +20,44 @@
 		      <th scope="col">초장</th>
 		      <th scope="col">엽수</th>
 		      <th scope="col">엽장</th> 
+		      <th scope="col">엽폭</th> 
+		      <th scope="col">하배축 장</th> 
+		      <th scope="col">하배축 경경</th> 
+		      <th scope="col">접목부위 경경</th> 
+		      <th scope="col">정단부 부위 경경</th> 
+		      <th scope="col">화아개수</th> 
+		      <th scope="col">1화방 개화절위</th> 
+		      <th scope="col">생체중</th> 
+		      <th scope="col">지상부 생체중</th> 
+		      <th scope="col">엽 생체중</th> 
+		      <th scope="col">줄기 생체중</th> 
+		      <th scope="col">뿌리 생체중</th> 
+		      <th scope="col">건물중</th> 
+		      <th scope="col">지상부 건물중</th> 
+		      <th scope="col">엽 건물중</th> 
+		      <th scope="col">줄기 건물중</th> 
+		      <th scope="col">뿌리 건물중</th> 
+		      <th scope="col">지하/지상부 비율</th> 
+		      <th scope="col">모종 충실도</th> 
+		      <th scope="col">엽면적</th> 
+		      <th scope="col">엽면적지수</th> 
+		      <th scope="col">엽면적비</th> 
+		      <th scope="col">엽중비</th> 
+		      <th scope="col">수광율</th> 
+		      <th scope="col">수광효율</th> 
+		      <th scope="col">수광능률</th> 
+		      <th scope="col">흡광계수</th> 
+		      <th scope="col">광이용효율</th> 
+		      <th scope="col">순광합성속도</th> 
+		      <th scope="col">기공확산전도도</th> 
+		      <th scope="col">증산속도</th> 
+		      <th scope="col">생장속도</th> 
+		      <th scope="col">상대생장률</th> 
+		      <th scope="col">엽온</th> 
+		      <th scope="col">엽록소 함량</th> 
+		      <th scope="col">엽식물체 수분함량장</th> 
+		      <th scope="col">관수량</th> 
+		      <th scope="col">시비량</th> 
 		      <th scope="col">작물정보ID</th>
 		      <th scope="col">수정</th>	
 		      <th scope="col">삭제</th>	
@@ -32,6 +73,49 @@
 				<td>{{i.NI_PH}}</td>
 				<td>{{i.NI_LN}}</td>
 				<td>{{i.NI_LL}}</td>
+
+				<td>{{i.NI_LW}}</td>
+				<td>{{i.NI_HL}}</td>
+				<td>{{i.NI_HSD}}</td>
+				<td>{{i.NI_SDGP}}</td>
+				<td>{{i.NI_SDA}}</td>
+				<td>{{i.NI_FBN}}</td>
+				<td>{{i.NI_FFN}}</td>
+				<td>{{i.NI_PFW}}</td>
+				<td>{{i.NI_SFW}}</td>
+				<td>{{i.NI_LFW}}</td>
+
+				<td>{{i.NI_S_FRESH_W}}</td>
+				<td>{{i.NI_ROOT_FW}}</td>
+				<td>{{i.NI_PDW}}</td>
+				<td>{{i.NI_SDW}}</td>
+				<td>{{i.NI_L_DRY_W}}</td>
+				<td>{{i.NI_S_DRY_W}}</td>
+				<td>{{i.NI_ROOT_DRY_W}}</td>
+				<td>{{i.NI_SRR}}</td>
+				<td>{{i.NI_SC}}</td>
+				<td>{{i.NI_LA}}</td>
+
+				<td>{{i.NI_LAI}}</td>
+				<td>{{i.NI_LAR}}</td>
+				<td>{{i.NI_SLA}}</td>
+				<td>{{i.NI_LI}}</td>
+				<td>{{i.NI_LIE}}</td>
+				<td>{{i.NI_LIC}}</td>
+				<td>{{i.NI_REC}}</td>
+				<td>{{i.NI_RUE}}</td>
+				<td>{{i.NI_NPR}}</td>
+				<td>{{i.NI_STOMATAL_C}}</td>
+
+				<td>{{i.NI_TR}}</td>
+				<td>{{i.NI_CGR}}</td>
+				<td>{{i.NI_RGR}}</td>
+				<td>{{i.NI_LEAF_TEMP}}</td>
+				<td>{{i.NI_CC}}</td>
+				<td>{{i.NI_PWC}}</td>
+				<td>{{i.NI_IA}}</td>
+				<td>{{i.NI_APF}}</td>
+
 				<td>{{i.CI_ID.CI_INFO_ID}}</td>
 		
 

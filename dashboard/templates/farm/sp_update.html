@@ -3,11 +3,6 @@
 {% load staticfiles %}
 	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
-	<script>
-		function lsel(id) {
-			$('#l').val(id);
-		}
-	</script>
 
 
 <form class="form-horizontal" method="post">
@@ -114,22 +109,34 @@
 		</div>
 	</div>	
 
-	<input type=hidden id=l name="l" />
-	<hr>
-	<div class="list-group">
-	  <button type="button" class="list-group-item list-group-item-action active">
-	    공정단계코드
-	  </button>
-	  {% for i in ds1 %}
-	  	<button type="button" class="list-group-item list-group-item-action" onclick="lsel({{i.id}})">
-	  		<table width="100%" class="right"><tr>
-	  			<td width="10%" class="border-right">{{i.PS_PLAN_CODE}}</td>
-	  			<td style="padding-left: 20px;">{{i.GI_ID.GB_NUMBER}}</td>
-	  		</tr></table>
-	  	</button>
-	  {% endfor %}
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">공정단계코드</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<select class="form-control" id=l name=l>
+					{% for i in ds1 %}
+						<option value="{{i.id}}">{{i.PS_PLAN_CODE}}</option>  	
+					{% endfor %}
+				</select>
+			</div>
+		</div>
 	</div>
-	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작물정보ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<select class="form-control" id=m name=m>
+					{% for i in ds2 %}
+						<option value="{{i.id}}">{{i.CI_INFO_ID}}</option>  	
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</div>
+
+
+
 	
 	<br>
 	<input type=hidden id=eid value="0" name=eid>
@@ -158,6 +165,7 @@
 	$("#j").val("{{ d.SP_GRAFT_TAKE }}");
 	$("#k").val("{{ d.SP_SHIPPING_DATE }}");
 	$("#l").val("{{ d.PS_ID.id }}");
+	$("#m").val("{{ d.CI_INFO_ID.id }}");
 	$("#eid").val("{{ d.id }}");
 	$("#btn").html("수정하기");
 </script>

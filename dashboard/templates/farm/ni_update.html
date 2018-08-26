@@ -51,22 +51,360 @@
 		</div>
 	</div>		
 
-	<input type=hidden id=e name="e" />
-	<hr>
-	<div class="list-group">
-	  <button type="button" class="list-group-item list-group-item-action active">
-	    작물정보ID
-	  </button>
-	  {% for i in ds1 %}
-	  	<button type="button" class="list-group-item list-group-item-action" onclick="esel({{i.id}})">
-	  		<table width="100%" class="right"><tr>
-	  			<td width="10%" class="border-right">{{i.CI_INFO_ID}}</td>
-	  			<td style="padding-left: 20px;">{{i.CI_VEGETABLES}}</td>
-	  		</tr></table>
-	  	</button>
-	  {% endfor %}
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽폭</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f1 name=f1 autofocus required/>
+			</div>
+		</div>
 	</div>
-	<hr>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">하배축 장</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f2 name=f2 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">하배축 경경</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f3 name=f3 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">접목부위 경경</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f4 name=f4 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">정단부 부위 경경</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f5 name=f5 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">화아개수</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f6 name=f6 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">1화방 개화절위</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f7 name=f7 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">생체중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f8 name=f8 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">지상부 생체중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f9 name=f9 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽 생체중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f10 name=f10 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">줄기 생체중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f11 name=f11 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">뿌리 생체중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f12 name=f12 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">건물중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f13 name=f13 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">지상부 건물중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f14 name=f14 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽 건물중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f15 name=f15 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">줄기 건물중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f16 name=f16 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">뿌리 건물중</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f17 name=f17 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">지하/지상부 비율</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f18 name=f18 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">모종 충실도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f19 name=f19 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽면적</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f20 name=f20 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽면적지수</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f21 name=f21 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽면적비</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f22 name=f22 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽중비</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f23 name=f23 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수광율</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f24 name=f24 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수광효율</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f25 name=f25 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">수광능률</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f26 name=f26 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">흡광계수</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f27 name=f27 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">광이용효율</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f28 name=f28 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">순광합성속도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f29 name=f29 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">기공확산전도도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f30 name=f30 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">증산속도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f31 name=f31 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">생장속도</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f32 name=f32 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">상대생장률</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f33 name=f33 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽온</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f34 name=f34 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">엽록소 함량</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f35 name=f35 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">식물체 수분함량</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f36 name=f36 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">관수량</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f37 name=f37 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">시비량</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<input type="number" class="form-control" id=f38 name=f38 autofocus required/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">작물정보ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<select class="form-control" id=e name=e>
+					{% for i in ds1 %}
+						<option value="{{i.id}}">{{i.CI_INFO_ID}}</option>  	
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</div>
 	
 	<br>
 	<input type=hidden id=eid value="0" name=eid>
@@ -88,6 +426,44 @@
 	$("#c").val("{{ d.NI_LN }}");
 	$("#d").val("{{ d.NI_LL }}");
 	$("#e").val("{{ d.CI_ID.id }}");
+	$("#f1").val("{{ d.NI_LW }}");
+	$("#f2").val("{{ d.NI_HL }}");
+	$("#f3").val("{{ d.NI_HSD }}");
+	$("#f4").val("{{ d.NI_SDGP }}");
+	$("#f5").val("{{ d.NI_SDA }}");
+	$("#f6").val("{{ d.NI_FBN }}");
+	$("#f7").val("{{ d.NI_FFN }}");
+	$("#f8").val("{{ d.NI_PFW }}");
+	$("#f9").val("{{ d.NI_SFW }}");
+	$("#f10").val("{{ d.NI_LFW }}");
+	$("#f11").val("{{ d.NI_S_FRESH_W }}");
+	$("#f12").val("{{ d.NI_ROOT_FW }}");
+	$("#f13").val("{{ d.NI_PDW }}");
+	$("#f14").val("{{ d.NI_SDW }}");
+	$("#f15").val("{{ d.NI_L_DRY_W }}");
+	$("#f16").val("{{ d.NI_S_DRY_W }}");
+	$("#f17").val("{{ d.NI_ROOT_DRY_W }}");
+	$("#f18").val("{{ d.NI_SRR }}");
+	$("#f19").val("{{ d.NI_SC }}");
+	$("#f20").val("{{ d.NI_LA }}");
+	$("#f21").val("{{ d.NI_LAI }}");
+	$("#f22").val("{{ d.NI_LAR }}");
+	$("#f23").val("{{ d.NI_SLA }}");
+	$("#f24").val("{{ d.NI_LI }}");
+	$("#f25").val("{{ d.NI_LIE }}");
+	$("#f26").val("{{ d.NI_LIC }}");
+	$("#f27").val("{{ d.NI_REC }}");
+	$("#f28").val("{{ d.NI_RUE }}");
+	$("#f29").val("{{ d.NI_NPR }}");
+	$("#f30").val("{{ d.NI_STOMATAL_C }}");
+	$("#f31").val("{{ d.NI_TR }}");
+	$("#f32").val("{{ d.NI_CGR }}");
+	$("#f33").val("{{ d.NI_RGR }}");
+	$("#f34").val("{{ d.NI_LEAF_TEMP }}");
+	$("#f35").val("{{ d.NI_CC }}");
+	$("#f36").val("{{ d.NI_PWC }}");
+	$("#f37").val("{{ d.NI_IA }}");
+	$("#f38").val("{{ d.NI_APF }}");
 	$("#eid").val("{{ d.id }}");
 	$("#btn").html("수정하기");
 </script>
