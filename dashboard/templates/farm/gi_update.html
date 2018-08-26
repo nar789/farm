@@ -3,44 +3,31 @@
 {% load staticfiles %}
 	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
-	<script>
-		function asel(id) {
-			$('#a').val(id);
-		}
-		function psel(id) {
-			$('#p').val(id);
-		}
-	</script>
-
 
 <form class="form-horizontal" method="post">
 	{% csrf_token %}
 	<h2 class="form-signin-heading"><a href="{% url 'gi' %}"><i class="fas fa-arrow-left"></i></a> 시설정보</h2>
 	<hr>
 
-	<input type=hidden id=a name="a" />
-	<hr>
-	<div class="list-group">
-	  <button type="button" class="list-group-item list-group-item-action active">
-	    농가경영체ID
-	  </button>
-	  {% for i in ds1 %}
-	  	<button type="button" class="list-group-item list-group-item-action" onclick="asel({{i.id}})">
-	  		<table width="100%" class="right"><tr>
-	  			<td width="10%" class="border-right">{{i.GB_FA_NAME}}</td>
-	  			<td style="padding-left: 20px;">{{i.GB_FA_ADDR}}</td>
-	  		</tr></table>
-	  	</button>
-	  {% endfor %}
-	</div>
-	<hr>
 
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">농가경영체ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<select class="form-control" id=a name=a>
+					{% for i in ds1 %}
+						<option value="{{i.id}}">{{i.GB_FA_ID}}</option>  	
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+	</div>
 
 	<div class="form-group">
 		<label for="email" class="cols-sm-2 control-label">시설번호</label>
 		<div class="cols-sm-10">
 			<div class="input-group">
-				<input type="text" class="form-control" id=b name=b autofocus required/>
+				<input type="number" class="form-control" id=b name=b autofocus required/>
 			</div>
 		</div>
 	</div>
@@ -163,24 +150,18 @@
 		</div>
 	</div>
 
-	<input type=hidden id=p name="p" />
-	<hr>
-	<div class="list-group">
-	  <button type="button" class="list-group-item list-group-item-action active">
-	    기기담당자ID
-	  </button>
-	  {% for i in ds2 %}
-	  	<button type="button" class="list-group-item list-group-item-action" onclick="psel({{i.id}})">
-	  		<table width="100%" class="right"><tr>
-	  			<td width="10%" class="border-right">{{i.DA_NAME}}</td>
-	  			<td style="padding-left: 20px;">{{i.DA_PHONE}}</td>
-	  		</tr></table>
-	  	</button>
-	  {% endfor %}
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">기기담당자ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<select class="form-control" id=p name=p>
+					{% for i in ds2 %}
+						<option value="{{i.id}}">{{i.DA_ID}}</option>  	
+					{% endfor %}
+				</select>
+			</div>
+		</div>
 	</div>
-	<hr>
-
-
 
 	<br>
 	<input type=hidden id=eid value="0" name=eid>

@@ -9,13 +9,19 @@
 		<h3><a href="{% url 'elist' %}"><i class="fas fa-arrow-left"></i></a> 농업경영정보</h3>		
 		<hr>
 		<a style="visibility: hidden;" href="{% url 'e1update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 1추가</button></a>
-		<table class="table table-hover">
+		<table class="table table-hover table-responsive">
 		  <thead>
 		    <tr>
 		      <th scope="col">ID</th>
 		      <th scope="col">농가경영체ID</th>
 		      <th scope="col">작업인코드</th>	
+		      <th scope="col">연락처</th>	
+		      <th scope="col">이메일</th>	
+		      <th scope="col">농가 주소</th>	
 		      <th scope="col">농업인이름</th>	
+		      <th scope="col">영농규모</th>	
+		      <th scope="col">가족구성</th>	
+		      <th scope="col">소속작목반</th>	
 		      <th scope="col">수정</th>	
 		      <th scope="col">삭제</th>	
 		    </tr>
@@ -28,7 +34,13 @@
 				<td>{{i.id}}</td>
 				<td>{{i.GB_FA_ID}}</td>
 				<td>{{i.CTVT_FCLTY_ID}}</td>
+				<td>{{i.GB_FA_PHONE}}</td>
+				<td>{{i.GB_FA_EMAIL}}</td>
+				<td>{{i.GB_FA_ADDR}}</td>
 				<td>{{i.GB_FA_NAME}}</td>
+				<td>{{i.GB_FA_SIZE}}</td>
+				<td>{{i.GB_FAM_NUM}}</td>
+				<td>{{i.GB_COOPER_UNIT}}</td>
 				<td><a href="{% url 'e1update' %}?id={{i.id}}"><button class="btn btn-info">수정</button></a></td>
 				<td><button class="btn btn-danger" data-toggle="modal" data-target="#delmodal{{i.id}}">삭제</button></td>
 

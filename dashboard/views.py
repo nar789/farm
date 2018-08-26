@@ -42,16 +42,28 @@ def logoutv(request):
 	return redirect('index')
 
 def elist(request):
-	return render(request,"farm/elist.html",{})
+	if request.user.is_authenticated:
+		return render(request,"farm/elist.html",{})
+	else:
+		return render(request,"farm/complete.html",{'msg':'접근 권한이 없습니다.'})
 
 def clist(request):
-	return render(request,"farm/clist.html",{})
+	if request.user.is_authenticated:
+		return render(request,"farm/clist.html",{})
+	else:
+		return render(request,"farm/complete.html",{'msg':'접근 권한이 없습니다.'})
 
 def plist(request):
-	return render(request,"farm/plist.html",{})
+	if request.user.is_authenticated:
+		return render(request,"farm/plist.html",{})
+	else:
+		return render(request,"farm/complete.html",{'msg':'접근 권한이 없습니다.'})
 
 def glist(request):
-	return render(request,"farm/glist.html",{})
+	if request.user.is_authenticated:
+		return render(request,"farm/glist.html",{})
+	else:
+		return render(request,"farm/complete.html",{'msg':'접근 권한이 없습니다.'})
 
 def e1(request):
 	
@@ -216,7 +228,10 @@ def da_delete(request,eid):
 
 
 def gi(request):
-	ds=gb_info.objects.all()
+	if request.user.username == "admin":
+		ds=gb_info.objects.all()
+	else:
+		ds=gb_info.objects.filter(FI_ID__GB_FA_ID=request.user.username)
 	return render(request,"farm/gi.html",{"ds":ds})
 
 
@@ -272,12 +287,16 @@ def gi_update(request):
 		return redirect('gi')
 	if 'id' in request.GET:
 		data=get_object_or_404(gb_info,id=request.GET['id'])
-		ds1=e1model.objects.all()
+		ds1=e1model.objects.filter(GB_FA_ID=request.user.username)
 		ds2=device_admin.objects.all()
+		if len(ds1)==0 or len(ds2)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 		return render(request,"farm/gi_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
 
-	ds1=e1model.objects.all()
+	ds1=e1model.objects.filter(GB_FA_ID=request.user.username)
 	ds2=device_admin.objects.all()
+	if len(ds1)==0 or len(ds2)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
 	return render(request,"farm/gi_update.html",{'ds1':ds1,'ds2':ds2})
 
 
@@ -289,7 +308,10 @@ def gi_delete(request,eid):
 
 
 def igi(request):
-	ds=inner_gh_info.objects.all()
+	if request.user.username == "admin":
+		ds=inner_gh_info.objects.all()
+	else:
+		ds=inner_gh_info.objects.filter(GB_INFO_ID__FI_ID__GB_FA_ID=request.user.username)
 	return render(request,"farm/igi.html",{"ds":ds})
 
 
@@ -302,6 +324,8 @@ def igi_update(request):
 		e=request.POST['e']
 		f=request.POST['f']
 		g=request.POST['g']
+		h=int(request.POST['h'])
+		h=sensor_info.objects.get(id=h)
 
 		eid=int(request.POST['eid'])
 
@@ -313,19 +337,26 @@ def igi_update(request):
 			getd.GB_INNER_SIZE=e
 			getd.GB_INNER_KIND=f
 			getd.GB_INNER_DEVI_LOC=g
+			getd.GB_DEVICE_ID=h
 			getd.save()
 		else:
-			data=inner_gh_info(GB_DONG_NUMBER=a,GB_INFO_ID=c,GB_KIND_CROP=d,GB_INNER_SIZE=e,GB_INNER_KIND=f,GB_INNER_DEVI_LOC=g)
+			data=inner_gh_info(GB_DONG_NUMBER=a,GB_INFO_ID=c,GB_KIND_CROP=d,GB_INNER_SIZE=e,GB_INNER_KIND=f,GB_INNER_DEVI_LOC=g,GB_DEVICE_ID=h)
 			data.save()
 
 		return redirect('igi')
 	if 'id' in request.GET:
 		data=get_object_or_404(inner_gh_info,id=request.GET['id'])
-		ds=gb_info.objects.all()
-		return render(request,"farm/igi_update.html",{'d':data,'ds':ds})
+		ds=gb_info.objects.filter(FI_ID__GB_FA_ID=request.user.username)
+		ds1=sensor_info.objects.all()
+		if len(ds1)==0 or len(ds)==0:
+			return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
+		return render(request,"farm/igi_update.html",{'d':data,'ds':ds,'ds1':ds1})
 
-	ds=gb_info.objects.all()
-	return render(request,"farm/igi_update.html",{'ds':ds})
+	ds=gb_info.objects.filter(FI_ID__GB_FA_ID=request.user.username)
+	ds1=sensor_info.objects.all()
+	if len(ds1)==0 or len(ds)==0:
+		return render(request,"farm/complete.html",{'msg':'종속데이터를 먼저 입력해주세요.'})
+	return render(request,"farm/igi_update.html",{'ds':ds,'ds1':ds1})
 
 
 def igi_delete(request,eid):
@@ -351,9 +382,6 @@ def si_update(request):
 		e=int(request.POST['e'])
 		e=com_infor.objects.get(id=e)
 
-		f=int(request.POST['f'])
-		f=inner_gh_info.objects.get(id=f)		
-		
 		eid=int(request.POST['eid'])
 
 		if eid!=0:
@@ -363,10 +391,9 @@ def si_update(request):
 			getd.SI_ACTU_CODE=c
 			getd.DC_ID=d
 			getd.CI_ID=e
-			getd.IGI_ID=f
 			getd.save()
 		else:
-			data=sensor_info(SI_ID=a,SI_KIND=b,SI_ACTU_CODE=c,DC_ID=d,CI_ID=e,IGI_ID=f)
+			data=sensor_info(SI_ID=a,SI_KIND=b,SI_ACTU_CODE=c,DC_ID=d,CI_ID=e)
 			data.save()
 
 		return redirect('si')
@@ -374,13 +401,11 @@ def si_update(request):
 		data=get_object_or_404(sensor_info,id=request.GET['id'])
 		ds1=device_code.objects.all()
 		ds2=com_infor.objects.all()
-		ds3=inner_gh_info.objects.all()
-		return render(request,"farm/si_update.html",{'d':data,'ds1':ds1,'ds2':ds2,'ds3':ds3})
+		return render(request,"farm/si_update.html",{'d':data,'ds1':ds1,'ds2':ds2})
 
 	ds1=device_code.objects.all()
 	ds2=com_infor.objects.all()
-	ds3=inner_gh_info.objects.all()
-	return render(request,"farm/si_update.html",{'ds1':ds1,'ds2':ds2,'ds3':ds3})
+	return render(request,"farm/si_update.html",{'ds1':ds1,'ds2':ds2})
 
 
 def si_delete(request,eid):

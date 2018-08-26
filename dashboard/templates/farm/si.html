@@ -18,10 +18,6 @@
 		      <th scope="col">구동기타입코드</th>	
 		      <th scope="col">장치코드</th>	
 		      <th scope="col">업체코드</th>	
-		      <th scope="col">업체명</th>	
-		      <th scope="col">내부시설번호</th>	
-		      <th scope="col">농가경영체ID</th>	
-		      <th scope="col">시설번호</th>	
 		      <th scope="col">수정</th>	
 		      <th scope="col">삭제</th>	
 		    </tr>
@@ -37,11 +33,6 @@
 				<td>{{i.SI_ACTU_CODE}}</td>
 				<td>{{i.DC_ID.DC_CODE}}</td>
 				<td>{{i.CI_ID.CI_CODE}}</td>
-				<td>{{i.CI_ID.CI_NAME}}</td>
-				<td>{{i.IGI_ID.GB_DONG_NUMBER}}</td>
-				<td>{{i.IGI_ID.GB_INFO_ID.FI_ID.GB_FA_ID}}</td>
-				<td>{{i.IGI_ID.GB_INFO_ID.GB_NUMBER}}</td>
-
 				<td><a href="{% url 'si_update' %}?id={{i.id}}"><button class="btn btn-info">수정</button></a></td>
 				<td><button class="btn btn-danger" data-toggle="modal" data-target="#delmodal{{i.id}}">삭제</button></td>
 

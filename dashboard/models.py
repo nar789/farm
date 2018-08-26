@@ -69,6 +69,15 @@ class gb_info(models.Model):
 	def __str__(self):
 		return "gb_info#%s" % self.id
 
+class sensor_info(models.Model):
+	SI_ID=models.IntegerField(null=True)
+	SI_KIND=models.CharField(max_length=10)
+	SI_ACTU_CODE=models.CharField(max_length=2)
+	DC_ID=models.ForeignKey(device_code)
+	CI_ID=models.ForeignKey(com_infor)
+
+	def __str__(self):
+		return "sensor_info$%s" % self.id
 
 class inner_gh_info(models.Model):
 	GB_DONG_NUMBER=models.IntegerField(null=True)
@@ -77,20 +86,10 @@ class inner_gh_info(models.Model):
 	GB_INNER_SIZE=models.IntegerField(null=True)
 	GB_INNER_KIND=models.CharField(max_length=10)
 	GB_INNER_DEVI_LOC=models.IntegerField(null=True)
+	GB_DEVICE_ID=models.ForeignKey(sensor_info)
 
 	def __str__(self):
 		return "inner_gh_info#%s" % self.id
-
-class sensor_info(models.Model):
-	SI_ID=models.IntegerField(null=True)
-	SI_KIND=models.CharField(max_length=10)
-	SI_ACTU_CODE=models.CharField(max_length=2)
-	DC_ID=models.ForeignKey(device_code)
-	CI_ID=models.ForeignKey(com_infor)
-	IGI_ID=models.ForeignKey(inner_gh_info)
-
-	def __str__(self):
-		return "sensor_info$%s" % self.id
 
 class work_info(models.Model):
 	GM_WORK_ID=models.IntegerField(null=True)

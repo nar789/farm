@@ -9,7 +9,7 @@
 		<h3><a href="{% url 'elist' %}"><i class="fas fa-arrow-left"></i></a> 시설정보</h3>		
 		<hr>
 		<a href="{% url 'gi_update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 추가</button></a>
-		<table class="table table-hover">
+		<table class="table table-hover table-responsive">
 		  <thead>
 		    <tr>
 		      <th scope="col">ID</th>
@@ -39,7 +39,7 @@
 			
 			<tr>
 				<td>{{i.id}}</td>
-				<td>{{i.FI_ID.GB_FA_NAME}}</td>
+				<td>{{i.FI_ID.GB_FA_ID}}</td>
 				<td>{{i.GB_NUMBER}}</td>
 				<td>{{i.GB_KIND_CODE}}</td>
 				<td>{{i.GB_FA_LATITUDE}}</td>
@@ -54,7 +54,7 @@
 				<td>{{i.GB_INSTAL}}</td>
 				<td>{{i.GB_MANUFA}}</td>
 				<td>{{i.GB_MAINTE_COMP}}</td>
-				<td>{{i.DA_ID.DA_NAME}}</td>
+				<td>{{i.DA_ID.DA_ID}}</td>
 
 
 				<td><a href="{% url 'gi_update' %}?id={{i.id}}"><button class="btn btn-info">수정</button></a></td>

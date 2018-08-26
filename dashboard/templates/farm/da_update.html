@@ -3,12 +3,6 @@
 {% load staticfiles %}
 	<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
 	<link href="{% static 'farm/css/e1update.css' %}" rel="stylesheet">
-	<script>
-		function sel(id) {
-			$('#e').val(id);
-		}
-	</script>
-
 
 <form class="form-horizontal" method="post">
 	{% csrf_token %}
@@ -51,23 +45,19 @@
 		</div>
 	</div>
 
-	<input type=hidden id=e name="e" />
-	
-	<hr>
-	<div class="list-group">
-	  <button type="button" class="list-group-item list-group-item-action active">
-	    업체정보
-	  </button>
-	  {% for i in ds %}
-	  	<button type="button" class="list-group-item list-group-item-action" onclick="sel({{i.id}})">
-	  		<table width="100%" class="right"><tr>
-	  			<td width="10%" class="border-right">{{i.CI_CODE}}</td>
-	  			<td style="padding-left: 20px;">{{i.CI_NAME}}</td>
-	  		</tr></table>
-	  	</button>
-	  {% endfor %}
+
+	<div class="form-group">
+		<label for="email" class="cols-sm-2 control-label">기기담당자ID</label>
+		<div class="cols-sm-10">
+			<div class="input-group">
+				<select class="form-control" id=e name=e>
+					{% for i in ds %}
+						<option value="{{i.id}}">{{i.CI_CODE}}</option>  	
+					{% endfor %}
+				</select>
+			</div>
+		</div>
 	</div>
-	<hr>
 
 	<br>
 	<input type=hidden id=eid value="0" name=eid>
