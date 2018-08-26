@@ -8,6 +8,7 @@
 	<div class=tg>
 		<h3><a href="{% url 'elist' %}"><i class="fas fa-arrow-left"></i></a> 농업경영정보</h3>		
 		<hr>
+		<a href="{% static 'farm/files/env_outer.xlsx' %}" download><button class="optional btn btn-primary mr-1"><i class="mdi mdi-download"></i> 엑셀파일로 다운로드</button></a>
 		<a style="visibility: hidden;" href="{% url 'e1update' %}"><button class="btn btn-success"><i class="fas fa-plus"></i> 1추가</button></a>
 		<table class="table table-hover table-responsive">
 		  <thead>
